@@ -33,7 +33,7 @@ function App() {
           <main className='content'>
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              <Route path='/' element={<Popup />} />
+              <Route path='/' element={<Login />} />
               <Route path='/popup' element={<Popup />} />
               <Route path='/onroadprice' element={<OnRoadPrice />} />
               <Route path='/corporates' element={<Corporates />} />
