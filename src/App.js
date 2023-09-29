@@ -20,8 +20,8 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const location = useLocation();
 
-  // Check if the current location is the login page
-  const isLoginPage = location.pathname === '/login';
+  // Check if the current location is the login page or the root path
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/';
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -53,3 +53,4 @@ function App() {
 }
 
 export default App;
+
