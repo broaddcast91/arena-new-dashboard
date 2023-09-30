@@ -125,9 +125,7 @@ const Sidebar = () => {
                 >
                  Arena
                 </Typography>
-                <Typography variant='h5' color={colors.sabooAutoColors[700]}>
-                  By Saboo RKS Group
-                </Typography>
+                
               </Box>
             </Box>
           )}

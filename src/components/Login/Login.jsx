@@ -60,21 +60,27 @@ const Login = () => {
       console.error("Error logging in:", error);
     }
   };
-  
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <img
-          src="https://www.saboogroups.com/assets/images/black-logo.png"
-          alt="Logo"
-          height="400"
-          width="150"
-          style={{ marginRight: "16px", marginTop: "-20px" }}
-        />
-      </Box>
 
-      <Grid container component="main" sx={{ height: "calc(100vh - 64px)" }}>
+    <ThemeProvider theme={defaultTheme} >
+    
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: "600px",
+          width: "1050px",
+          marginTop:"70px", 
+          marginLeft:"190px",
+         
+          // Center the container horizontally
+          boxShadow: "10px 0px 10px rgba(0, 0, 0, 0.2), 0px 10px 10px rgba(0, 0, 0, 0.2)", // Add shadow to left and bottom
+          display: "flex", // Use flexbox
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
+        }}
+      >
         <CssBaseline />
         <Grid
           item
@@ -101,6 +107,13 @@ const Login = () => {
               alignItems: "center",
             }}
           >
+             <img
+          src="https://www.saboogroups.com/assets/images/black-logo.png"
+          alt="Logo"
+          height="400"
+          width="150"
+          style={{ marginRight: "16px", marginTop: "-20px" }}
+        />
             <Avatar sx={{ m: 1, backgroundColor: "#3e4396" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -109,6 +122,7 @@ const Login = () => {
             </Typography>
 
             {error && <p className="text-danger">{error}</p>}
+            
             <Box
               component="form"
               noValidate
@@ -142,9 +156,15 @@ const Login = () => {
                   endAdornment: (
                     <IconButton
                       onClick={toggleShowPassword}
-                      aria-label={showPassword ? "Hide Password" : "Show Password"}
+                      aria-label={
+                        showPassword ? "Hide Password" : "Show Password"
+                      }
                     >
-                      {showPassword ? <VisibilityIcon /> :  <VisibilityOffIcon />}
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   ),
                 }}
@@ -165,7 +185,9 @@ const Login = () => {
           </Box>
         </Grid>
       </Grid>
+      
     </ThemeProvider>
+   
   );
 };
 
