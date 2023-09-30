@@ -52,7 +52,7 @@ const Login = () => {
       if (response.ok) {
         const { token } = await response.json();
         localStorage.setItem("authToken", token);
-        window.location.href = "https://arena-dashboard.netlify.app/";
+        window.location.href = "https://arena-dashboard.netlify.app/popup";
       } else {
         setError("Invalid email or password");
       }
