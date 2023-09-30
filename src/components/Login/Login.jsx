@@ -52,7 +52,7 @@ const Login = () => {
       if (response.ok) {
         const { token } = await response.json();
         localStorage.setItem("authToken", token);
-        window.location.href = "https://arena-dashboard.netlify.app/popup";
+        window.location.href = "https://arena-dashboard.netlify.app/";
       } else {
         setError("Invalid email or password");
       }
@@ -62,41 +62,30 @@ const Login = () => {
   };
 
   return (
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ flexGrow: 1 }}>
+       
+      </Box>
 
-    <ThemeProvider theme={defaultTheme} >
-    
-      <Grid
-        container
-        component="main"
-        sx={{
-          height: "600px",
-          width: "1050px",
-          marginTop:"70px", 
-          marginLeft:"190px",
-         
-          // Center the container horizontally
-          boxShadow: "10px 0px 10px rgba(0, 0, 0, 0.2), 0px 10px 10px rgba(0, 0, 0, 0.2)", // Add shadow to left and bottom
-          display: "flex", // Use flexbox
-          justifyContent: "center", // Center horizontally
-          alignItems: "center", // Center vertically
-        }}
-      >
+      <Grid container component="main" sx={{ height: "calc(100vh - 64px)" }}>
         <CssBaseline />
         <Grid
-          item
-          xs={false}
-          sm={5}
-          md={7}
-          sx={{
-            backgroundImage:
-              "url(https://t3.ftcdn.net/jpg/03/39/70/90/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: "light",
-            backgroundPosition: "center",
-            height: "600px",
-            width: "600px",
-          }}
-        />
+  item
+  xs={false}
+  sm={6}
+  md={7}
+  sx={{
+    backgroundImage:
+      "url(https://miro.medium.com/v2/resize:fit:1358/1*9m-WDdL_ji01bGbjEnutEw.gif)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "light",
+    backgroundPosition: "center",
+    height: "500px",
+    width: "400px",
+    marginTop:"80px",
+    backgroundSize: "contain", // Adjust this property for the size you want
+  }}
+/>
         <Grid item xs={12} sm={8} md={5}>
           <Box
             sx={{
@@ -105,6 +94,7 @@ const Login = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              marginRight:"100px"
             }}
           >
              <img
@@ -122,7 +112,6 @@ const Login = () => {
             </Typography>
 
             {error && <p className="text-danger">{error}</p>}
-            
             <Box
               component="form"
               noValidate
@@ -156,15 +145,9 @@ const Login = () => {
                   endAdornment: (
                     <IconButton
                       onClick={toggleShowPassword}
-                      aria-label={
-                        showPassword ? "Hide Password" : "Show Password"
-                      }
+                      aria-label={showPassword ? "Hide Password" : "Show Password"}
                     >
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                     </IconButton>
                   ),
                 }}
@@ -177,7 +160,7 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#3e4396" }}
+                sx={{ mt: 3, mb: 2, backgroundColor: "#3e4396", borderRadius:"10px" }}
               >
                 Login In
               </Button>
@@ -185,9 +168,7 @@ const Login = () => {
           </Box>
         </Grid>
       </Grid>
-      
     </ThemeProvider>
-   
   );
 };
 
