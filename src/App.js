@@ -23,43 +23,28 @@ function App() {
   // Check if the current location is the login page or the root path
   const isLoginPage = location.pathname === '/login' || location.pathname === '/';
 
-  // Check if the user is authenticated (e.g., by checking a token in localStorage)
-  const isAuthenticated = localStorage.getItem('token'); // Replace with your authentication logic
-
-  // Conditionally render the Sidebar based on authentication status
-  const shouldRenderSidebar = isAuthenticated && !isLoginPage;
-
-  // Conditionally render routes based on authentication status
-  const routes = isAuthenticated ? (
-    <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/popup' element={<Popup />} />
-      <Route path='/onroadprice' element={<OnRoadPrice />} />
-      <Route path='/corporates' element={<Corporates />} />
-      <Route path='/finance' element={<Finance />} />
-      <Route path='/insurance' element={<Insurance />} />
-      <Route path='/alldata' element={<AllData />} />
-      <Route path='/bookaservice' element={<BookAService />} />
-      <Route path='/drvingschool' element={<DrvingSchool />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/logout' element={<Logout />} />
-    </Routes>
-  ) : (
-    <Routes>
-      <Route path='/' element={<Login />} />
-    </Routes>
-  );
-
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className='app'>
           {/* Conditionally render the Sidebar */}
-          {shouldRenderSidebar ? <Sidebar isSidebar={isSidebar} /> : null}
+          {isLoginPage ? null : <Sidebar isSidebar={isSidebar} />}
           <main className='content'>
             <Topbar setIsSidebar={setIsSidebar} />
-            {routes}
+            <Routes>
+              <Route path='/' element={<Login />} />
+              <Route path='/popup' element={<Popup />} />
+              <Route path='/onroadprice' element={<OnRoadPrice />} />
+              <Route path='/corporates' element={<Corporates />} />
+              <Route path='/finance' element={<Finance />} />
+              <Route path='/insurance' element={<Insurance />} />
+              <Route path='/alldata' element={<AllData />} />
+              <Route path='/bookaservice' element={<BookAService />} />
+              <Route path='/drvingschool' element={<DrvingSchool />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/logout' element={<Logout />} />
+            </Routes>
           </main>
         </div>
       </ThemeProvider>
@@ -68,3 +53,4 @@ function App() {
 }
 
 export default App;
+
