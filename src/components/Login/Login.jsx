@@ -147,7 +147,7 @@ const Login = () => {
                       onClick={toggleShowPassword}
                       aria-label={showPassword ? "Hide Password" : "Show Password"}
                     >
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? <VisibilityIcon />   : <VisibilityOffIcon />}
                     </IconButton>
                   ),
                 }}
