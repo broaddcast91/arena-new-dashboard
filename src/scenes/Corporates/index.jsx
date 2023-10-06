@@ -60,7 +60,11 @@ const Corporates = () => {
             headerName: "Email",
             flex: 1,
           },
-         
+          {
+            field: "outlet",
+            headerName: "Outlet",
+            flex: 1,
+          },
           {
             field: "date",
             headerName: "Date",

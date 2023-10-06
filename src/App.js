@@ -42,8 +42,9 @@ function App() {
               <Route path='/alldata' element={<AllData />} />
               <Route path='/bookaservice' element={<BookAService />} />
               <Route path='/drvingschool' element={<DrvingSchool />} />
-              <Route path='/login' element={<Login />} />
+
               <Route path='/logout' element={<Logout />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </main>
         </div>
