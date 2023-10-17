@@ -9,10 +9,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //import date range picker files
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+// import { DemoContainer } from '@mui/x-da ate-pickers-pro/DateRangePicker';
 
 import {
   DataGrid,
@@ -23,6 +20,7 @@ import {
 } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
+import TextField from "@mui/material/TextField";
 const AllData = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -94,26 +92,35 @@ const AllData = () => {
     return { ...item, id: index + 1 };
   });
 
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+  
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
+  
+
   async function fetchUniqueValues(startDate, endDate) {
     try {
       setLoading(true);
-      const formattedStartDate = new Date(startDate);
-      formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      const formattedStartDateString = formattedStartDate
-        .toISOString()
-        .slice(0, 10);
+      // const formattedStartDate = new Date(startDate);
+      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
+      // const formattedStartDateString = formattedStartDate
+      //   .toISOString()
+      //   .slice(0, 10);
 
-      const formattedEndDate = new Date(endDate);
-      formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      const formattedEndDateString = formattedEndDate
-        .toISOString()
-        .slice(0, 10);
+      // const formattedEndDate = new Date(endDate);
+      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
+      // const formattedEndDateString = formattedEndDate
+      //   .toISOString()
+      //   .slice(0, 10);
 
       const res = await axios.post(
         'https://arena-backend-zj42.onrender.com/findDataInRangeInAllCollections',
         {
-          startDate: formattedStartDateString,
-          endDate: formattedEndDateString,
+          startDate: startDate,
+          endDate: endDate,
         }
       );
       const unifiedData = res.data.data.map((item) => ({
@@ -211,6 +218,8 @@ const AllData = () => {
 
       setData(unifiedData);
       setLoading(false);
+      setStartDate(null)
+      setEndDate(null)
     } catch (err) {
       setError(err);
       setLoading(false);
@@ -250,6 +259,7 @@ const AllData = () => {
 
       setData(processedData);
       setLoading(false);
+      setStartDate(null)
     } catch (err) {
       setError(err);
       setLoading(false);
@@ -367,35 +377,30 @@ const CustomToolbar = () => {
       >
      <Header title="All Data" subtitle='data from all the forms'  />
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ marginRight: "10px" }}>
-            {" "}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer
-                components={["DateRangePicker"]}
-                sx={{ padding: "6px", backgroundColor: "transparent" }}
-              >
-                <DateRangePicker
-                  localeText={{
-                    start: (
-                      <span style={{ fontSize: "16px", padding: "2px" }}>
-                        Start Date
-                      </span>
-                    ),
-                    end: (
-                      <span style={{ fontSize: "16px", padding: "2px" }}>
-                        End Date
-                      </span>
-                    ),
-                  }}
-                  start={startDate}
-                  end={endDate}
-                  onChange={(newValue) => {
-                    setStartDate(newValue[0]);
-                    setEndDate(newValue[1]);
-                  }}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
+        <div style={{ marginRight: "10px" }}>
+            <TextField
+              id="start-date"
+              label="Start Date"
+              type="date"
+              value={startDate}
+              onChange={handleStartDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ margin: "10px" }}
+            />
+
+            <TextField
+              id="end-date"
+              label="End Date"
+              type="date"
+              value={endDate}
+              onChange={handleEndDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ margin: "10px" }}
+            />
           </div>
 
           <Button
@@ -480,72 +485,87 @@ const CustomToolbar = () => {
       </div>
       
       <Box
-  m="40px 0 0 0"
-  height="75vh"
-  sx={{
-    "& .MuiDataGrid-root": {
-      border: "none",
-      backgroundColor: "white",
-     // border: "1px solid #ccc", // Add a border to the table
-    },
-    "& .MuiDataGrid-cell": {
-     // borderBottom: "none",
-      backgroundColor: "white",
-      borderBottom: "1px solid #ccc", // Add a border to table cells
-    },
-    "& .phone-column--cell": {
-     color: colors.sabooAutoColors[500],
-      backgroundColor: "white",
-    },
-    "& .MuiDataGrid-columnHeader": {
-      color: "white",
-      backgroundColor: colors.blueAccent[700], // Optional background color for headers
-    },
-    "& .MuiDataGrid-virtualScroller": {
-      backgroundColor: colors.sabooAutoColors[400],
-    },
-    // "& .MuiDataGrid-footerContainer": {
-    //   borderTop: "none",
-    //   backgroundColor: colors.blueAccent[700],
-    //   "& .MuiTypography-root": {
-    //     color: "white", // Change the footer text color to white
-    //   },
-    // },
-    "& .MuiCheckbox-root": {
-      color: `${colors.blueAccent[700]} !important`,
-    },
-    "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-      color: `${colors.blueAccent[700]} !important`,
-    },
-    '& .MuiDataGrid-sortIcon': {
-      color:'white',
-    },
-    '& .css-196n7va-MuiSvgIcon-root': {
-      color:'white',
-    },
-  }}
->
-  {loading ? (
-    <div>Processing, please wait...</div>
-  ) : error ? (
-    "Error ~ Something went wrong :)"
-  ) : (
-    <DataGrid
-      rows={newData}
-      columns={col}
-      components={{ Toolbar: CustomToolbar }}
-      sx={{
-        backgroundColor: "white", // Set the background color to white
-      }}
-    />
-  )}
-</Box>
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+            backgroundColor: "white",
+            // border: "1px solid #ccc", // Add a border to the table
+          },
+          "& .phone-column--cell": {
+            color: colors.sabooAutoColors[500],
+          },
+          "& .MuiDataGrid-columnHeader": {
+            color: "white",
+            backgroundColor: colors.blueAccent[700], // Optional background color for headers
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.sabooAutoColors[400],
+          },
+          // "& .MuiDataGrid-footerContainer": {
+          //   borderTop: "none",
+          //   backgroundColor: colors.blueAccent[700],
+          //   "& .MuiTypography-root": {
+          //     color: "white", // Change the footer text color to white
+          //   },
+          // },
+          "& .MuiCheckbox-root": {
+            color: `${colors.blueAccent[700]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.blueAccent[700]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text:hover ": {
+            color: `${colors.blueAccent[700]}} !important`,
+          },
+          "& .MuiDataGrid-sortIcon": {
+            color: "white",
+          },
+          // "& .MuiDataGrid-cell": {
+          //   //borderBottom: "none",
+          //   backgroundColor: "white",
+          //   borderBottom: "1px solid #ccc", // Add a border to table cells
+          // },
+
+          "& .css-196n7va-MuiSvgIcon-root": {
+            color: "white",
+          },
+        }}
+      >
+        {loading ? (
+          <div style={{ fontSize: "14px" }}>Processing, please wait...</div>
+        ) : error ? (
+          "Error ~ Something went wrong :)"
+        ) : (
+          <DataGrid
+            rows={newData}
+            columns={col.map((column) => ({
+              ...column,
+              renderCell: (params) => (
+                <div
+                  style={{
+                    whiteSpace: "pre-wrap", // Enable word wrapping
+                    overflow: "hidden", // Hide overflow content
+                    textOverflow: "ellipsis", // Show ellipsis for overflow
+                  }}
+                >
+                  {params.value}
+                </div>
+              ),
+            }))}
+            components={{ Toolbar: CustomToolbar }}
+            sx={{
+              backgroundColor: "white", // Set the background color to white
+            }}
+          />
+        )}
+      </Box>
 
     </Box>
   );
 };
 
 export default AllData;
-
 
 

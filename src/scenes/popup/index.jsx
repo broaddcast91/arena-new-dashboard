@@ -5,12 +5,13 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
+import TextField from "@mui/material/TextField";
 
 //import date range picker files
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { LocalizationProvider } from "@mui/x-date-pickers";
+// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -41,7 +42,7 @@ const Popup = () => {
             field: "phone",
             headerName: "Phone Number",
             flex: 1,
-            cellClassName: 'phone-column--cell',
+            cellClassName: "phone-column--cell",
           },
 
           {
@@ -75,23 +76,23 @@ const Popup = () => {
   async function fetchUniqueValues(startDate, endDate) {
     try {
       setLoading(true);
-      const formattedStartDate = new Date(startDate);
-      formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      const formattedStartDateString = formattedStartDate
-        .toISOString()
-        .slice(0, 10);
+      // const formattedStartDate = new Date(startDate);
+      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
+      // const formattedStartDateString = formattedStartDate
+      //   .toISOString()
+      //   .slice(0, 10);
 
-      const formattedEndDate = new Date(endDate);
-      formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      const formattedEndDateString = formattedEndDate
-        .toISOString()
-        .slice(0, 10);
+      // const formattedEndDate = new Date(endDate);
+      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
+      // const formattedEndDateString = formattedEndDate
+      //   .toISOString()
+      //   .slice(0, 10);
 
       const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/popupRangeEntries",
         {
-          startDate: formattedStartDateString,
-          endDate: formattedEndDateString,
+          startDate: startDate,
+          endDate: endDate,
         }
       );
       setCol([
@@ -100,7 +101,7 @@ const Popup = () => {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
-          cellClassName: 'phone-column--cell',
+          cellClassName: "phone-column--cell",
         },
         {
           field: "time",
@@ -177,7 +178,7 @@ const Popup = () => {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
-          cellClassName: 'phone-column--cell',
+          cellClassName: "phone-column--cell",
         },
         {
           field: "date",
@@ -216,7 +217,12 @@ const Popup = () => {
 
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
-        { field: "phoneNumber", headerName: "Phone Number", flex: 1 ,   cellClassName: 'phone-column--cell',},
+        {
+          field: "phoneNumber",
+          headerName: "Phone Number",
+          flex: 1,
+          cellClassName: "phone-column--cell",
+        },
         { field: "count", headerName: "Count", flex: 1 },
         { field: "date", headerName: "Date", flex: 1 },
       ]);
@@ -241,7 +247,7 @@ const Popup = () => {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
-          cellClassName: 'phone-column--cell',
+          cellClassName: "phone-column--cell",
         },
 
         {
@@ -291,8 +297,8 @@ const Popup = () => {
   };
 
   // Custom toolbar with the download button
-  
-const CustomToolbar = () => {
+
+  const CustomToolbar = () => {
     return (
       <GridToolbarContainer>
         <GridToolbarColumnsButton />
@@ -308,13 +314,21 @@ const CustomToolbar = () => {
             padding: "5px",
             minWidth: "auto",
             height: "25px",
-            color:"#3e4396"
+            color: "#3e4396",
           }}
         >
           <DownloadIcon />
         </IconButton>
       </GridToolbarContainer>
     );
+  };
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
   };
   return (
     <Box m="20px">
@@ -326,43 +340,43 @@ const CustomToolbar = () => {
       >
         <Header title="Popup" subtitle="List of Popup Enquiries" />
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ marginRight: "10px" }}>
-            {" "}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer
-                components={["DateRangePicker"]}
-                sx={{ padding: "6px", backgroundColor: "transparent" }}
-              >
-                <DateRangePicker
-                  localeText={{
-                    start: (
-                      <span style={{ fontSize: "16px", padding: "2px" }}>
-                        Start Date
-                      </span>
-                    ),
-                    end: (
-                      <span style={{ fontSize: "16px", padding: "2px" }}>
-                        End Date
-                      </span>
-                    ),
-                  }}
-                  start={startDate}
-                  end={endDate}
-                  onChange={(newValue) => {
-                    setStartDate(newValue[0]);
-                    setEndDate(newValue[1]);
-                  }}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
+        <div style={{ marginRight: "10px" }}>
+            <TextField
+              id="start-date"
+              label="Start Date"
+              type="date"
+              value={startDate}
+              onChange={handleStartDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ margin: "10px" }}
+            />
+
+            <TextField
+              id="end-date"
+              label="End Date"
+              type="date"
+              value={endDate}
+              onChange={handleEndDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ margin: "10px" }}
+            />
           </div>
 
           <Button
             variant="contained"
             color="primary"
-            sx={{ backgroundColor: "#3e4396", mr: 2,color: "white",  '&:hover': {
-              backgroundColor: "red",
-            }, }}
+            sx={{
+              backgroundColor: "#3e4396",
+              mr: 2,
+              color: "white",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
             onClick={handleDup}
           >
             Duplicates
@@ -394,9 +408,14 @@ const CustomToolbar = () => {
           <Button
             variant="contained"
             color="primary"
-            sx={{ mr: 2, backgroundColor: "#3e4396" , color: "white" ,  '&:hover': {
-              backgroundColor: "red",
-            },}}
+            sx={{
+              mr: 2,
+              backgroundColor: "#3e4396",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
             onClick={uniqueEntries}
           >
             {" "}
@@ -405,9 +424,13 @@ const CustomToolbar = () => {
           <Button
             variant="contained"
             color="primary"
-            sx={{ backgroundColor: "#3e4396",color: "white",  '&:hover': {
-              backgroundColor: "red",
-            }, }}
+            sx={{
+              backgroundColor: "#3e4396",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
             onClick={handleReset}
           >
             Reset
@@ -436,69 +459,84 @@ const CustomToolbar = () => {
           /> */}
         </div>
       </div>
-      
-      <Box
-  m="40px 0 0 0"
-  height="75vh"
-  sx={{
-    "& .MuiDataGrid-root": {
-      border: "none",
-      backgroundColor: "white",
-     // border: "1px solid #ccc", // Add a border to the table
-    },
-    "& .MuiDataGrid-cell": {
-      //borderBottom: "none",
-      backgroundColor: "white",
-      borderBottom: "1px solid #ccc", // Add a border to table cells
-    },
-    "& .phone-column--cell": {
-      color: colors.sabooAutoColors[500],
-      backgroundColor: "white",
-    },
-    "& .MuiDataGrid-columnHeader": {
-      color: "white",
-      backgroundColor: colors.blueAccent[700], // Optional background color for headers
-    },
-    "& .MuiDataGrid-virtualScroller": {
-      backgroundColor: colors.sabooAutoColors[400],
-    },
-    // "& .MuiDataGrid-footerContainer": {
-    //   borderTop: "none",
-    //   backgroundColor: colors.blueAccent[700],
-    //   "& .MuiTypography-root": {
-    //     color: "white", // Change the footer text color to white
-    //   },
-    // },
-    "& .MuiCheckbox-root": {
-      color: `${colors.blueAccent[700]} !important`,
-    },
-    "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-      color: `${colors.blueAccent[700]} !important`,
-    },
-    '& .MuiDataGrid-sortIcon': {
-      color:'white',
-    },
-    '& .css-196n7va-MuiSvgIcon-root': {
-      color:'white',
-    },
-  }}
->
-  {loading ? (
-    <div>Processing, please wait...</div>
-  ) : error ? (
-    "Error ~ Something went wrong :)"
-  ) : (
-    <DataGrid
-      rows={newData}
-      columns={col}
-      components={{ Toolbar: CustomToolbar }}
-      sx={{
-        backgroundColor: "white", // Set the background color to white
-      }}
-    />
-  )}
-</Box>
 
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+            backgroundColor: "white",
+            // border: "1px solid #ccc", // Add a border to the table
+          },
+          "& .phone-column--cell": {
+            color: colors.sabooAutoColors[500],
+          },
+          "& .MuiDataGrid-columnHeader": {
+            color: "white",
+            backgroundColor: colors.blueAccent[700], // Optional background color for headers
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.sabooAutoColors[400],
+          },
+          // "& .MuiDataGrid-footerContainer": {
+          //   borderTop: "none",
+          //   backgroundColor: colors.blueAccent[700],
+          //   "& .MuiTypography-root": {
+          //     color: "white", // Change the footer text color to white
+          //   },
+          // },
+          "& .MuiCheckbox-root": {
+            color: `${colors.blueAccent[700]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.blueAccent[700]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text:hover ": {
+            color: `${colors.blueAccent[700]}} !important`,
+          },
+          "& .MuiDataGrid-sortIcon": {
+            color: "white",
+          },
+          // "& .MuiDataGrid-cell": {
+          //   //borderBottom: "none",
+          //   backgroundColor: "white",
+          //   borderBottom: "1px solid #ccc", // Add a border to table cells
+          // },
+
+          "& .css-196n7va-MuiSvgIcon-root": {
+            color: "white",
+          },
+        }}
+      >
+        {loading ? (
+          <div style={{ fontSize: "14px" }}>Processing, please wait...</div>
+        ) : error ? (
+          "Error ~ Something went wrong :)"
+        ) : (
+          <DataGrid
+            rows={newData}
+            columns={col.map((column) => ({
+              ...column,
+              renderCell: (params) => (
+                <div
+                  style={{
+                    whiteSpace: "pre-wrap", // Enable word wrapping
+                    overflow: "hidden", // Hide overflow content
+                    textOverflow: "ellipsis", // Show ellipsis for overflow
+                  }}
+                >
+                  {params.value}
+                </div>
+              ),
+            }))}
+            components={{ Toolbar: CustomToolbar }}
+            sx={{
+              backgroundColor: "white", // Set the background color to white
+            }}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

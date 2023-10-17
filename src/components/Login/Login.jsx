@@ -50,11 +50,18 @@ const Login = () => {
       );
 
       if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem("authToken", token);
-        window.location.href = "/popup";
+        const responseData = await response.json();
+        if (responseData.status) {
+          const token = responseData.data.token;
+          localStorage.setItem("authToken", token);
+          window.location.href = "/popup";
+        } else {
+          // Handle unsuccessful login, e.g., show an error message.
+          setError("Login failed: " + responseData.message);
+        }
       } else {
-        setError("Invalid email or password");
+        // Handle other network errors.
+        setError("Network error");
       }
     } catch (error) {
       console.error("Error logging in:", error);
@@ -63,29 +70,27 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ flexGrow: 1 }}>
-       
-      </Box>
+      <Box sx={{ flexGrow: 1 }}></Box>
 
       <Grid container component="main" sx={{ height: "calc(100vh - 64px)" }}>
         <CssBaseline />
         <Grid
-  item
-  xs={false}
-  sm={6}
-  md={7}
-  sx={{
-    backgroundImage:
-      "url(https://miro.medium.com/v2/resize:fit:1358/1*9m-WDdL_ji01bGbjEnutEw.gif)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor: "light",
-    backgroundPosition: "center",
-    height: "500px",
-    width: "400px",
-    marginTop:"80px",
-    backgroundSize: "contain", // Adjust this property for the size you want
-  }}
-/>
+          item
+          xs={false}
+          sm={6}
+          md={7}
+          sx={{
+            backgroundImage:
+              "url(https://miro.medium.com/v2/resize:fit:1358/1*9m-WDdL_ji01bGbjEnutEw.gif)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "light",
+            backgroundPosition: "center",
+            height: "500px",
+            width: "400px",
+            marginTop: "80px",
+            backgroundSize: "contain",
+          }}
+        />
         <Grid item xs={12} sm={8} md={5}>
           <Box
             sx={{
@@ -94,16 +99,16 @@ const Login = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginRight:"100px"
+              marginRight: "100px",
             }}
           >
-             <img
-          src="https://www.saboogroups.com/assets/images/black-logo.png"
-          alt="Logo"
-          height="400"
-          width="150"
-          style={{ marginRight: "16px", marginTop: "-20px" }}
-        />
+            <img
+              src="https://www.saboogroups.com/assets/images/black-logo.png"
+              alt="Logo"
+              height="400"
+              width="150"
+              style={{ marginRight: "16px", marginTop: "-20px" }}
+            />
             <Avatar sx={{ m: 1, backgroundColor: "#3e4396" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -145,9 +150,15 @@ const Login = () => {
                   endAdornment: (
                     <IconButton
                       onClick={toggleShowPassword}
-                      aria-label={showPassword ? "Hide Password" : "Show Password"}
+                      aria-label={
+                        showPassword ? "Hide Password" : "Show Password"
+                      }
                     >
-                      {showPassword ? <VisibilityIcon />   : <VisibilityOffIcon />}
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   ),
                 }}
@@ -160,7 +171,12 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#3e4396", borderRadius:"10px" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#3e4396",
+                  borderRadius: "10px",
+                }}
               >
                 Login In
               </Button>

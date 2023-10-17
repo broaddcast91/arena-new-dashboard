@@ -20,16 +20,27 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const location = useLocation();
 
+  const [dataRefreshCounter, setDataRefreshCounter] = useState(0); // Add this state variable
+
   // Check if the current location is the login page or the root path
   const isLoginPage = location.pathname === '/login' || location.pathname === '/';
+
+  const refreshData = () => {
+    // You can implement your data refresh logic here
+    // You might want to fetch new data or update state as needed
+    // Increment the dataRefreshCounter to trigger a re-render
+    setDataRefreshCounter(dataRefreshCounter + 1);
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className='app'>
-          {/* Conditionally render the Sidebar */}
-          {isLoginPage ? null : <Sidebar isSidebar={isSidebar} />}
+          {/* Conditionally render the Sidebar and pass the refreshData callback */}
+          {isLoginPage ? null : (
+            <Sidebar isSidebar={isSidebar} refreshData={refreshData} />
+          )}
           <main className='content'>
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
