@@ -1,10 +1,12 @@
-import { Box, Button, useTheme } from "@mui/material";
-
+import { Box, Button } from "@mui/material";
+// import { DataGrid,  } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
+// import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
 import TextField from "@mui/material/TextField";
 
 //import date range picker files
@@ -21,10 +23,15 @@ import {
 } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
-const Popup = () => {
+
+const SabooGroups = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+
   const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -34,43 +41,52 @@ const Popup = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getPopups"
+          "https://saboo-groups-backend.onrender.com/getcontactform"
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.5 },
+          { field: "id", headerName: "ID", flex: 0.25 },
           {
             field: "name",
             headerName: "Name",
+            flex: 0.75,
+          },
+          {
+            field: "email",
+            headerName: "Email",
             flex: 1,
-            cellClassName: "name-column--cell",
           },
           {
             field: "phone",
             headerName: "Phone Number",
-            flex: 1,
-            cellClassName: "phone-column--cell",
+            flex: 0.75,
+            cellClassName: "Mobile-column--cell",
           },
 
           {
-            field: "outlet",
-            headerName: "Outlet",
+            field: "company",
+            headerName: "Company",
             flex: 1,
           },
           {
-            field: "model",
-            headerName: "Model",
+            field: "subject",
+            headerName: "Subject",
+            flex: 0.80,
+          },
+          {
+            field: "message",
+            headerName: "Message",
             flex: 1,
           },
-
           {
             field: "date",
             headerName: "Date",
-            flex: 1,
+            flex: 0.5,
           },
+
           {
             field: "time",
             headerName: "Time",
-            flex: 1,
+            flex: 0.35,
           },
         ]);
         setData(res.data.data);
@@ -87,149 +103,166 @@ const Popup = () => {
     return { ...item, id: index + 1 };
   });
 
-  //date range unique function
+//   date range unique function
+    const handleStartDateChange = (event) => {
+      setStartDate(event.target.value);
+    };
 
-  async function fetchUniqueValues(startDate, endDate) {
-    try {
-      setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
+    const handleEndDateChange = (event) => {
+      setEndDate(event.target.value);
+    };
 
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
+    async function fetchUniqueValues(startDate, endDate) {
+      try {
 
-      const res = await axios.post(
-        "https://arena-backend-zj42.onrender.com/popupRangeEntries",
-        {
-          startDate: startDate,
-          endDate: endDate,
-        }
-      );
-      setCol([
-        { field: "id", headerName: "ID" },
-        {
-          field: "phone",
-          headerName: "Phone Number",
-          flex: 1,
-          cellClassName: "phone-column--cell",
-        },
-        {
-          field: "time",
-          headerName: "Time",
-          flex: 1,
-        },
-        {
-          field: "date",
-          headerName: "Date",
-          flex: 1,
-        },
-      ]);
-      setData(res.data.data);
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
+        const res = await axios.post(
+          "https://saboo-groups-backend.onrender.com/SabooGroupsRange",
+          {
+            startDate: startDate,
+            endDate: endDate,
+          }
+        );
+        setCol([
+            { field: "id", headerName: "ID", flex: 0.25 },
+            {
+              field: "name",
+              headerName: "Name",
+              flex: 0.75,
+            },
+            {
+              field: "email",
+              headerName: "Email",
+              flex: 1,
+            },
+            {
+              field: "phone",
+              headerName: "Phone Number",
+              flex: 0.75,
+              cellClassName: "Mobile-column--cell",
+            },
+  
+            {
+              field: "company",
+              headerName: "Company",
+              flex: 1,
+            },
+            {
+              field: "subject",
+              headerName: "Subject",
+              flex: 0.80,
+            },
+            {
+              field: "message",
+              headerName: "Message",
+              flex: 1,
+            },
+            {
+              field: "date",
+              headerName: "Date",
+              flex: 0.5,
+            },
+  
+            {
+              field: "time",
+              headerName: "Time",
+              flex: 0.35,
+            },
+          ]);
+        setData(res.data.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
     }
-  }
 
-  useEffect(() => {
-    if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
-    }
-  }, [startDate, endDate]);
+    useEffect(() => {
+      if (startDate && endDate) {
+        fetchUniqueValues(startDate, endDate);
+      }
+    }, [startDate, endDate]);
 
-  //   try {
-  //     setLoading(true);
-  //     const res = await axios.get(
-  //       `https://autozone-8azp.onrender.com/getpopups?date=${newInputValue}`
-  //     );
-  //     setCol([
-  //       { field: 'id', headerName: 'ID' },
-  //       {
-  //         field: 'number',
-  //         headerName: 'Phone Number',
-  //         flex: 1,
-  //       },
+    const handleReset = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          "https://saboo-groups-backend.onrender.com/getcontactform"
+        );
+        setCol([
+            { field: "id", headerName: "ID", flex: 0.25 },
+            {
+              field: "name",
+              headerName: "Name",
+              flex: 0.75,
+            },
+            {
+              field: "email",
+              headerName: "Email",
+              flex: 1,
+            },
+            {
+              field: "phone",
+              headerName: "Phone Number",
+              flex: 0.75,
+              cellClassName: "Mobile-column--cell",
+            },
+  
+            {
+              field: "company",
+              headerName: "Company",
+              flex: 1,
+            },
+            {
+              field: "subject",
+              headerName: "Subject",
+              flex: 0.80,
+            },
+            {
+              field: "message",
+              headerName: "Message",
+              flex: 1,
+            },
+            {
+              field: "date",
+              headerName: "Date",
+              flex: 0.5,
+            },
+  
+            {
+              field: "time",
+              headerName: "Time",
+              flex: 0.35,
+            },
+          ]);
+        setData(res.data.data);
 
-  //       {
-  //         field: 'time',
-  //         headerName: 'Time',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'date',
-  //         headerName: 'Date',
-  //         flex: 1,
-  //       },
-  //     ]);
-  //     setData(res.data.data);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     setError(err);
-  //     setLoading(false);
-  //   }
-  // }
-  // const handleRemoveDuplicates = (newInputValue) => {
-  //   fetchData(newInputValue);
-  // };
-  const handleReset = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getpopups"
-      );
-
-      setStartDate(null);
-      setEndDate(null);
-
-      setCol([
-        { field: "id", headerName: "ID" },
-        {
-          field: "phone",
-          headerName: "Phone Number",
-          flex: 1,
-          cellClassName: "phone-column--cell",
-        },
-        {
-          field: "date",
-          headerName: "Date",
-          flex: 1,
-        },
-        {
-          field: "time",
-          headerName: "Time",
-          flex: 1,
-        },
-      ]);
-      setData(res.data.data);
-
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    }
-  };
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
 
   const handleDup = async () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupilicatepopups"
+        "https://saboo-groups-backend.onrender.com/dupesSabooGroupsContactUs"
       );
 
-      // Process the response data to create rows with unique phoneNumber and count combinations
-      const processedData = res.data.data.map((item, index) => ({
-        id: index + 1,
-        phoneNumber: item.number,
-        count: item.count,
-        date: item.date, // Adding the date field
-      }));
+      // Process the response data to create rows with phoneNumber, model, and count
+      const processedData = [];
+      let idCounter = 1;
+
+      res.data.data.forEach((item) => {
+        processedData.push({
+          id: idCounter++,
+          phoneNumber: item.number,
+
+          count: item.count,
+          date: item.date, // Adding the date field
+        });
+      });
 
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -237,10 +270,11 @@ const Popup = () => {
           field: "phoneNumber",
           headerName: "Phone Number",
           flex: 1,
-          cellClassName: "phone-column--cell",
+          cellClassName: "Mobile-column--cell",
         },
+        // { field: "model", headerName: "Model", flex: 1 },
         { field: "count", headerName: "Count", flex: 1 },
-        { field: "date", headerName: "Date", flex: 1 },
+        { field: "date", headerName: "Date", flex: 1 }, // Adding the date column
       ]);
 
       setData(processedData);
@@ -250,44 +284,65 @@ const Popup = () => {
       setLoading(false);
     }
   };
-
-  const uniqueEntries = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/popUpUniqueEntries`
-      );
-      setCol([
-        { field: "id", headerName: "ID" },
-        {
-          field: "phone",
-          headerName: "Phone Number",
-          flex: 1,
-          cellClassName: "phone-column--cell",
-        },
-
-        {
-          field: "date",
-          headerName: "Date",
-          flex: 1,
-        },
-        {
-          field: "time",
-          headerName: "Time",
-          flex: 1,
-        },
-      ]);
-      setData(res.data.data);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  };
-
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
+    const uniqueEntries = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `https://saboo-groups-backend.onrender.com/SabooGroupsUniqueEntries`
+        );
+        setCol([
+            { field: "id", headerName: "ID", flex: 0.25 },
+            {
+              field: "name",
+              headerName: "Name",
+              flex: 0.75,
+            },
+            {
+              field: "email",
+              headerName: "Email",
+              flex: 1,
+            },
+            {
+              field: "phone",
+              headerName: "Phone Number",
+              flex: 0.75,
+              cellClassName: "Mobile-column--cell",
+            },
+  
+            {
+              field: "company",
+              headerName: "Company",
+              flex: 1,
+            },
+            {
+              field: "subject",
+              headerName: "Subject",
+              flex: 0.80,
+            },
+            {
+              field: "message",
+              headerName: "Message",
+              flex: 1,
+            },
+            {
+              field: "date",
+              headerName: "Date",
+              flex: 0.5,
+            },
+  
+            {
+              field: "time",
+              headerName: "Time",
+              flex: 0.35,
+            },
+          ]);
+        setData(res.data.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
   const handleDownloadCSV = () => {
     const csvData = [];
     const headers = col.map((column) => column.headerName);
@@ -305,7 +360,7 @@ const Popup = () => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = "popUp(Arena).csv";
+    a.download = "contactUs(sabooGroups).csv";
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -338,14 +393,6 @@ const Popup = () => {
       </GridToolbarContainer>
     );
   };
-
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
-  };
-
-  const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
-  };
   return (
     <Box m="20px">
       <div
@@ -354,9 +401,13 @@ const Popup = () => {
           justifyContent: "space-between",
         }}
       >
-        <Header title="Popup" subtitle="List of Popup Enquiries" />
+        {" "}
+        <Header
+          title="Saboo Groups Contact us "
+          subtitle="Data from Saboo Groups"
+        />
         <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ marginRight: "10px" }}>
+          <div style={{ marginRight: "10px" }}>
             <TextField
               id="start-date"
               label="Start Date"
@@ -398,29 +449,7 @@ const Popup = () => {
             Duplicates
           </Button>
 
-          {/* <input
-            type='date'
-            required
-            sx={{ mr: 2, backgroundColor: '#940004' }}
-            value={inputValue}
-            onChange={(e) => {
-              const newInputValue = e.target.value;
-              console.log('New input value:', newInputValue);
-              setInputValue(newInputValue);
-              handleRemoveDuplicates(newInputValue);
-            }}
-            style={{
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '6px',
-              border: 'none',
-              padding: '6px',
-              margin: '15px', // Add margin to separate input and button
-              flex: 1,
-              // Allow the input to grow to fill available space
-            }}
-          /> */}
-
+            
           <Button
             variant="contained"
             color="primary"
@@ -451,28 +480,6 @@ const Popup = () => {
           >
             Reset
           </Button>
-          {/* <Button
-            variant='contained'
-            color='primary'
-            sx={{ ml: 2, backgroundColor: '#940004' }}
-            onClick={handleRemoveDuplicates}
-          >
-            Unique
-          </Button>
-          <input
-            type='date'
-            required
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            style={{
-              marginLeft: '16px',
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '8px',
-              border: 'none',
-              padding: '8px',
-            }}
-          /> */}
         </div>
       </div>
 
@@ -557,4 +564,4 @@ const Popup = () => {
   );
 };
 
-export default Popup;
+export default SabooGroups;
