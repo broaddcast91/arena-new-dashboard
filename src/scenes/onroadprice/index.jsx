@@ -45,7 +45,7 @@ const OnRoadPrice = () => {
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
           {
-            field: "Last_Name",
+            field: "name",
             headerName: "Name",
             flex: 1,
           },
@@ -55,19 +55,19 @@ const OnRoadPrice = () => {
           //   flex: 1,
           // },
           {
-            field: "Mobile",
+            field: "phone",
             headerName: "Phone Number",
             flex: 1,
             cellClassName: "Mobile-column--cell",
           },
 
           {
-            field: "LEADCF6",
+            field: "model",
             headerName: "Vehicle",
             flex: 1,
           },
           {
-            field: "LEADCF23",
+            field: "outlet",
             headerName: "Outlet",
             flex: 1,
           },
@@ -136,10 +136,9 @@ const OnRoadPrice = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          //  cellClassName: 'name-column--cell',
         },
         // {
         //   field: 'email',
@@ -147,19 +146,19 @@ const OnRoadPrice = () => {
         //   flex: 1,
         // },
         {
-          field: "Mobile",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "Mobile-column--cell",
         },
 
         {
-          field: "LEADCF6",
+          field: "model",
           headerName: "Vehicle",
           flex: 1,
         },
         {
-          field: "LEADCF23",
+          field: "outlet",
           headerName: "Outlet",
           flex: 1,
         },
@@ -266,10 +265,9 @@ const OnRoadPrice = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          cellClassName: "name-column--cell",
         },
         // {
         //   field: 'email',
@@ -277,19 +275,19 @@ const OnRoadPrice = () => {
         //   flex: 1,
         // },
         {
-          field: "Mobile",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "Mobile-column--cell",
         },
 
         {
-          field: "LEADCF6",
+          field: "model",
           headerName: "Vehicle",
           flex: 1,
         },
         {
-          field: "LEADCF23",
+          field: "outlet",
           headerName: "Outlet",
           flex: 1,
         },
@@ -369,10 +367,9 @@ const OnRoadPrice = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          // cellClassName: 'name-column--cell',
         },
         // {
         //   field: 'email',
@@ -380,19 +377,19 @@ const OnRoadPrice = () => {
         //   flex: 1,
         // },
         {
-          field: "Mobile",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "Mobile-column--cell",
         },
 
         {
-          field: "LEADCF6",
+          field: "model",
           headerName: "Vehicle",
           flex: 1,
         },
         {
-          field: "LEADCF23",
+          field: "outlet",
           headerName: "Outlet",
           flex: 1,
         },
