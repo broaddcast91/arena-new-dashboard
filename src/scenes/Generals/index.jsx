@@ -1,14 +1,16 @@
 import { Box, Button } from "@mui/material";
-// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { tokens } from "../../theme";
 
+import { tokens } from "../../theme";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-
+//import date range picker files
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { LocalizationProvider } from "@mui/x-date-pickers";
+// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -20,62 +22,66 @@ import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import TextField from "@mui/material/TextField";
 
-const BookAService = () => {
+const Generals = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+  const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
-  const [col, setCol] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getService"
+          "https://arena-backend-zj42.onrender.com/getGenerals"
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.5 },
-          {
-            field: "name",
-            headerName: "Name",
-            flex: 1,
-            cellClassName: "name-column--cell",
-          },
-          {
-            field: "phone",
-            headerName: "Phone Number",
-            flex: 1,
-            cellClassName: "phone-column--cell",
-          },
-          {
-            field: "email",
-            headerName: "Email",
-            flex: 1,
-          },
+            { field: "id", headerName: "ID", flex: 0.25 },
+            {
+              field: "name",
+              headerName: "Name",
+              flex: 1,
+            },
+            {
+              field: "phone",
+              headerName: "Phone Number",
+              flex: 1,
+              cellClassName: "phone-column--cell",
+            },
+            {
+              field: "email",
+              headerName: "Email",
+              flex: 1,
+            },
 
-          {
-            field: "outlet",
-            headerName: "Outlet",
-            flex: 1,
-          },
-
-          {
-            field: "date",
-            headerName: "Date",
-            flex: 1,
-          },
-          {
-            field: "time",
-            headerName: "Time",
-            flex: 1,
-          },
-        ]);
+            {
+              field: "outlet",
+              headerName: "Outlet",
+              flex: 0.75,
+            },
+           
+            {
+              field: "model",
+              headerName: "Model",
+              flex: 0.75,
+            },
+            {
+              field: "date",
+              headerName: "Date",
+              flex: 0.75,
+            },
+    
+            {
+              field: "time",
+              headerName: "Time",
+              flex: 0.75,
+            },
+          ]);
         setData(res.data.data);
         setLoading(false);
       } catch (err) {
@@ -90,8 +96,7 @@ const BookAService = () => {
     return { ...item, id: index + 1 };
   });
 
-  //date range unique function
- 
+
  const handleStartDateChange = (event) => {
   setStartDate(event.target.value);
 };
@@ -116,47 +121,52 @@ const handleEndDateChange = (event) => {
       //   .slice(0, 10);
 
       const res = await axios.post(
-        "https://arena-backend-zj42.onrender.com/serviceRangeData",
+        "https://arena-backend-zj42.onrender.com/generalRange",
         {
           startDate: startDate,
           endDate: endDate,
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
         {
-          field: "LEADCF22",
+          field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex: 0.75,
         },
-
+       
+        {
+          field: "model",
+          headerName: "Model",
+          flex: 0.75,
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
+
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -172,47 +182,53 @@ const handleEndDateChange = (event) => {
       fetchUniqueValues(startDate, endDate);
     }
   }, [startDate, endDate]);
+
   const handleReset = async () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getService"
+        "https://arena-backend-zj42.onrender.com/getGenerals"
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
         {
-          field: "LEADCF22",
+          field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex: 0.75,
         },
-
+       
+        {
+          field: "model",
+          headerName: "Model",
+          flex: 0.75,
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
+
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -228,7 +244,7 @@ const handleEndDateChange = (event) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupeService"
+        "https://arena-backend-zj42.onrender.com/duplicateGeneral"
       );
 
       // Process the response data to create rows with phoneNumber, model, and count
@@ -239,7 +255,7 @@ const handleEndDateChange = (event) => {
         processedData.push({
           id: idCounter++,
           phoneNumber: item.number,
-
+          model: item.model || "N/A",
           count: item.count,
           date: item.date, // Adding the date field
         });
@@ -253,7 +269,7 @@ const handleEndDateChange = (event) => {
           flex: 1,
           cellClassName: "phone-column--cell",
         },
-
+        // { field: 'model', headerName: 'Model', flex: 1 },
         { field: "count", headerName: "Count", flex: 1 },
         { field: "date", headerName: "Date", flex: 1 }, // Adding the date column
       ]);
@@ -269,43 +285,48 @@ const handleEndDateChange = (event) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/serviceUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/generalUniqueEntries`
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
         {
-          field: "LEADCF22",
+          field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex: 0.75,
         },
-
+       
+        {
+          field: "model",
+          headerName: "Model",
+          flex: 0.75,
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
+
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -332,7 +353,7 @@ const handleEndDateChange = (event) => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = "Service(Arena).csv";
+    a.download = "Finance(Arena).csv";
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -374,8 +395,8 @@ const handleEndDateChange = (event) => {
         }}
       >
         <Header
-          title="Book a Service"
-          subtitle="List of Vehicle Service requests for Future Reference"
+          title="generals"
+          subtitle="all data from rest of the forms"
         />
         <div style={{ display: "flex", alignItems: "center" }}>
         <div style={{ marginRight: "10px" }}>
@@ -403,7 +424,6 @@ const handleEndDateChange = (event) => {
               sx={{ margin: "10px" }}
             />
           </div>
-
           <Button
             variant="contained"
             color="primary"
@@ -579,4 +599,4 @@ const handleEndDateChange = (event) => {
   );
 };
 
-export default BookAService;
+export default Generals;

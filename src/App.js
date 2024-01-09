@@ -15,6 +15,7 @@ import Logout from './components/Logout/Logout';
 import AllData from './scenes/AllData';
 import Login from './components/Login/Login';
 import SabooGroups from './scenes/SabooGroups'
+import Generals from './scenes/Generals';
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -53,6 +54,7 @@ function App() {
               <Route path='/alldata' element={<AllData />} />
               <Route path='/bookaservice' element={<BookAService />} />
               <Route path='/drvingschool' element={<DrvingSchool />} />
+              <Route path='/general' element={<Generals />} />
               <Route path='/saboogroups' element={<SabooGroups />} />
               <Route path='/logout' element={<Logout />} />
               <Route path='/login' element={<Login />} />

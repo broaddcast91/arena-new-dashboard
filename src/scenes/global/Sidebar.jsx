@@ -17,7 +17,7 @@ import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
-
+import ListAltIcon from '@mui/icons-material/ListAlt';
 const CustomSubMenuTitle = ({ title, icon }) => (
   <Tooltip title={title} placement="right">
     <span >
@@ -195,16 +195,24 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
               <Item
+                title="Corporates"
+                to="/corporates"
+                icon={<CorporateFareIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
                 title="Driving School"
                 to="/drvingschool"
                 icon={<SportsMotorsportsIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
+              
               <Item
-                title="Corporates"
-                to="/corporates"
-                icon={<CorporateFareIcon />}
+                title="Generals Enquiries"
+                to="/general"
+                icon={<ListAltIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
