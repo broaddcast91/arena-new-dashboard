@@ -6,11 +6,6 @@ import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-//import date range picker files
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-// import { LocalizationProvider } from "@mui/x-date-pickers";
-// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -70,6 +65,12 @@ const Generals = () => {
               headerName: "Model",
               flex: 0.75,
             },
+
+            {
+                field: "leadFrom",
+                headerName: "Lead From",
+                flex: 0.75,
+              },
             {
               field: "date",
               headerName: "Date",
@@ -158,6 +159,11 @@ const handleEndDateChange = (event) => {
           flex: 0.75,
         },
         {
+            field: "leadFrom",
+            headerName: "Lead From",
+            flex: 0.75,
+          },
+        {
           field: "date",
           headerName: "Date",
           flex: 0.75,
@@ -219,6 +225,11 @@ const handleEndDateChange = (event) => {
           headerName: "Model",
           flex: 0.75,
         },
+        {
+            field: "leadFrom",
+            headerName: "Lead From",
+            flex: 0.75,
+          },
         {
           field: "date",
           headerName: "Date",
@@ -317,6 +328,11 @@ const handleEndDateChange = (event) => {
           headerName: "Model",
           flex: 0.75,
         },
+        {
+            field: "leadFrom",
+            headerName: "Lead From",
+            flex: 0.75,
+          }, 
         {
           field: "date",
           headerName: "Date",

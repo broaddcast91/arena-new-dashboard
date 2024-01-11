@@ -74,11 +74,7 @@ const Finance = () => {
             headerName: "Message",
             flex: 1.5,
           },
-          {
-            field: "outlet",
-            headerName: "Outlet",
-            flex: 0.75,
-          },
+  
           {
             field: "purchase_time",
             headerName: "Purchase Time",
@@ -180,11 +176,7 @@ const handleEndDateChange = (event) => {
           headerName: "Message",
           flex: 1.5,
         },
-        {
-          field: "outlet",
-          headerName: "Outlet",
-          flex: 0.75,
-        },
+
         {
           field: "purchase_time",
           headerName: "Purchase Time",
@@ -260,11 +252,6 @@ const handleEndDateChange = (event) => {
           field: "comments",
           headerName: "Message",
           flex: 1.5,
-        },
-        {
-          field: "outlet",
-          headerName: "Outlet",
-          flex: 0.75,
         },
         {
           field: "purchase_time",
@@ -378,11 +365,7 @@ const handleEndDateChange = (event) => {
           headerName: "Message",
           flex: 1.5,
         },
-        {
-          field: "outlet",
-          headerName: "Outlet",
-          flex: 0.75,
-        },
+
         {
           field: "purchase_time",
           headerName: "Purchase Time",

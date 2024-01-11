@@ -1,12 +1,13 @@
 import { Box, Button } from "@mui/material";
-// import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
 
-import LooksOneIcon from "@mui/icons-material/LooksOne";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
 import axios from "axios";
+
 //import date range picker files
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -22,7 +23,8 @@ import {
 import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import TextField from "@mui/material/TextField";
-const Insurance = () => {
+
+const ContactUs = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -38,36 +40,55 @@ const Insurance = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getIsurance"
+          "https://arena-backend-zj42.onrender.com/getContactUs"
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.5 },
+          { field: "id", headerName: "ID", flex: 0.25 },
           {
             field: "name",
             headerName: "Name",
-            flex: 1,
+            flex: 0.75,
           },
           {
             field: "phone",
             headerName: "Phone Number",
-            flex: 1,
+            flex: 0.75,
             cellClassName: "phone-column--cell",
           },
           {
             field: "email",
             headerName: "Email",
+            flex: 0.75,
+          },
+          {
+            field: "model",
+            headerName: "Model",
+            flex:  0.75,
+          },
+          {
+            field: "subject",
+            headerName: "Subject",
             flex: 1,
           },
-
+          {
+            field: "message",
+            headerName: "Message",
+            flex: 2.5,
+          },
+          {
+            field: "outlet",
+            headerName: "Outlet",
+            flex:  0.75,
+          },
           {
             field: "date",
             headerName: "Date",
-            flex: 1,
+            flex:  0.75,
           },
           {
             field: "time",
             headerName: "Time",
-            flex: 1,
+            flex:  0.75,
           },
         ]);
         setData(res.data.data);
@@ -84,21 +105,31 @@ const Insurance = () => {
     return { ...item, id: index + 1 };
   });
 
- 
-  //date range unique function
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
   };
-
+  
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value);
   };
-
+  
   async function fetchUniqueValues(startDate, endDate) {
     try {
-    
+      setLoading(true);
+      // const formattedStartDate = new Date(startDate);
+      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
+      // const formattedStartDateString = formattedStartDate
+      //   .toISOString()
+      //   .slice(0, 10);
+
+      // const formattedEndDate = new Date(endDate);
+      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
+      // const formattedEndDateString = formattedEndDate
+      //   .toISOString()
+      //   .slice(0, 10);
+
       const res = await axios.post(
-        "https://arena-backend-zj42.onrender.com/insuranceRange",
+        "https://arena-backend-zj42.onrender.com/drivingSchoolRange",
         {
           startDate: startDate,
           endDate: endDate,
@@ -107,22 +138,28 @@ const Insurance = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
+          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
         {
           field: "date",
           headerName: "Date",
@@ -152,28 +189,33 @@ const Insurance = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getIsurance"
+        "https://arena-backend-zj42.onrender.com/getContactUs"
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
           cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
         {
           field: "date",
           headerName: "Date",
@@ -198,22 +240,16 @@ const Insurance = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/duplicateInsurance"
+        "https://arena-backend-zj42.onrender.com/dupesDrivingSchool"
       );
 
-      // Process the response data to create rows with phoneNumber, model, and count
-      const processedData = [];
-      let idCounter = 1;
-
-      res.data.data.forEach((item) => {
-        processedData.push({
-          id: idCounter++,
-          phoneNumber: item.number,
-
-          count: item.count,
-          date: item.date, // Adding the date field
-        });
-      });
+      // Process the response data to create rows
+      const processedData = res.data.data.map((item, index) => ({
+        id: index + 1,
+        date: item.date,
+        phoneNumber: item.number,
+        count: item.count,
+      }));
 
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -223,9 +259,10 @@ const Insurance = () => {
           flex: 1,
           cellClassName: "phone-column--cell",
         },
-
         { field: "count", headerName: "Count", flex: 1 },
-        { field: "date", headerName: "Date", flex: 1 }, // Adding the date column
+        { field: "date", headerName: "Date", flex: 1 },
+
+        {},
       ]);
 
       setData(processedData);
@@ -239,27 +276,33 @@ const Insurance = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/insuranceUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/drivingSchoolUniqueEntries`
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
+          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
           flex: 1,
         },
 
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
         {
           field: "date",
           headerName: "Date",
@@ -296,7 +339,7 @@ const Insurance = () => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = "Insurance(Arena).csv";
+    a.download = "Driving_School(Arena).csv";
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -337,10 +380,9 @@ const Insurance = () => {
           justifyContent: "space-between",
         }}
       >
-        {" "}
         <Header
-          title="Insurance"
-          subtitle="List of Insurance data for Future Reference"
+          title="Contact Us"
+          subtitle="Data form contact us form"
         />
         <div style={{ display: "flex", alignItems: "center" }}>
         <div style={{ marginRight: "10px" }}>
@@ -386,27 +428,27 @@ const Insurance = () => {
           </Button>
 
           {/* <input
-                  type='date'
-                  required
-                  sx={{ mr: 2, backgroundColor: '#940004' }}
-                  value={inputValue}
-                  onChange={(e) => {
-                    const newInputValue = e.target.value;
-                    console.log('New input value:', newInputValue);
-                    setInputValue(newInputValue);
-                    handleRemoveDuplicates(newInputValue);
-                  }}
-                  style={{
-                    backgroundColor: '#940004',
-                    color: 'white',
-                    borderRadius: '6px',
-                    border: 'none',
-                    padding: '6px',
-                    margin: '15px', // Add margin to separate input and button
-                    flex: 1,
-                    // Allow the input to grow to fill available space
-                  }}
-                /> */}
+            type='date'
+            required
+            sx={{ mr: 2, backgroundColor: '#940004' }}
+            value={inputValue}
+            onChange={(e) => {
+              const newInputValue = e.target.value;
+              console.log('New input value:', newInputValue);
+              setInputValue(newInputValue);
+              handleRemoveDuplicates(newInputValue);
+            }}
+            style={{
+              backgroundColor: '#940004',
+              color: 'white',
+              borderRadius: '6px',
+              border: 'none',
+              padding: '6px',
+              margin: '15px', // Add margin to separate input and button
+              flex: 1,
+              // Allow the input to grow to fill available space
+            }}
+          /> */}
 
           <Button
             variant="contained"
@@ -439,27 +481,27 @@ const Insurance = () => {
             Reset
           </Button>
           {/* <Button
-                  variant='contained'
-                  color='primary'
-                  sx={{ ml: 2, backgroundColor: '#940004' }}
-                  onClick={handleRemoveDuplicates}
-                >
-                  Unique
-                </Button>
-                <input
-                  type='date'
-                  required
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  style={{
-                    marginLeft: '16px',
-                    backgroundColor: '#940004',
-                    color: 'white',
-                    borderRadius: '8px',
-                    border: 'none',
-                    padding: '8px',
-                  }}
-                /> */}
+            variant='contained'
+            color='primary'
+            sx={{ ml: 2, backgroundColor: '#940004' }}
+            onClick={handleRemoveDuplicates}
+          >
+            Unique
+          </Button>
+          <input
+            type='date'
+            required
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              marginLeft: '16px',
+              backgroundColor: '#940004',
+              color: 'white',
+              borderRadius: '8px',
+              border: 'none',
+              padding: '8px',
+            }}
+          /> */}
         </div>
       </div>
 
@@ -544,4 +586,4 @@ const Insurance = () => {
   );
 };
 
-export default Insurance;
+export default ContactUs;

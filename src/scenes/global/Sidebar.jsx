@@ -18,6 +18,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 const CustomSubMenuTitle = ({ title, icon }) => (
   <Tooltip title={title} placement="right">
     <span >
@@ -183,7 +184,7 @@ const Sidebar = () => {
               <Item
                 title="Finance"
                 to="/finance"
-                icon={<PriceChangeIcon />}
+                icon={<CurrencyRupeeIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -208,7 +209,13 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              
+               <Item
+                title="Contact Us"
+                to="/contactus"
+                icon={<ContactPhoneIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
               <Item
                 title="Generals Enquiries"
                 to="/general"
