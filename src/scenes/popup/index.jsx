@@ -112,21 +112,39 @@ const Popup = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID" },
+        { field: "id", headerName: "ID", flex: 0.5 },
+        {
+          field: "name",
+          headerName: "Name",
+          flex: 1,
+          cellClassName: "name-column--cell",
+        },
         {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
+
         {
-          field: "time",
-          headerName: "Time",
+          field: "outlet",
+          headerName: "Outlet",
           flex: 1,
         },
         {
+          field: "model",
+          headerName: "Model",
+          flex: 1,
+        },
+
+        {
           field: "date",
           headerName: "Date",
+          flex: 1,
+        },
+        {
+          field: "time",
+          headerName: "Time",
           flex: 1,
         },
       ]);
@@ -144,40 +162,6 @@ const Popup = () => {
     }
   }, [startDate, endDate]);
 
-  //   try {
-  //     setLoading(true);
-  //     const res = await axios.get(
-  //       `https://autozone-8azp.onrender.com/getpopups?date=${newInputValue}`
-  //     );
-  //     setCol([
-  //       { field: 'id', headerName: 'ID' },
-  //       {
-  //         field: 'number',
-  //         headerName: 'Phone Number',
-  //         flex: 1,
-  //       },
-
-  //       {
-  //         field: 'time',
-  //         headerName: 'Time',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'date',
-  //         headerName: 'Date',
-  //         flex: 1,
-  //       },
-  //     ]);
-  //     setData(res.data.data);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     setError(err);
-  //     setLoading(false);
-  //   }
-  // }
-  // const handleRemoveDuplicates = (newInputValue) => {
-  //   fetchData(newInputValue);
-  // };
   const handleReset = async () => {
     try {
       setLoading(true);
@@ -189,13 +173,31 @@ const Popup = () => {
       setEndDate(null);
 
       setCol([
-        { field: "id", headerName: "ID" },
+        { field: "id", headerName: "ID", flex: 0.5 },
+        {
+          field: "name",
+          headerName: "Name",
+          flex: 1,
+          cellClassName: "name-column--cell",
+        },
         {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
+
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          flex: 1,
+        },
+
         {
           field: "date",
           headerName: "Date",
@@ -258,12 +260,29 @@ const Popup = () => {
         `https://arena-backend-zj42.onrender.com/popUpUniqueEntries`
       );
       setCol([
-        { field: "id", headerName: "ID" },
+        { field: "id", headerName: "ID", flex: 0.5 },
+        {
+          field: "name",
+          headerName: "Name",
+          flex: 1,
+          cellClassName: "name-column--cell",
+        },
         {
           field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
+        },
+
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          flex: 1,
         },
 
         {
