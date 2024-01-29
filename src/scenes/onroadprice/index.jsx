@@ -89,6 +89,8 @@ const OnRoadPrice = () => {
           },
         ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -180,6 +182,8 @@ const OnRoadPrice = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -309,7 +313,8 @@ const OnRoadPrice = () => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -352,6 +357,8 @@ const OnRoadPrice = () => {
       ]);
 
       setData(processedData);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -411,6 +418,8 @@ const OnRoadPrice = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

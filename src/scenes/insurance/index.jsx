@@ -71,6 +71,8 @@ const Insurance = () => {
           },
         ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -135,6 +137,8 @@ const Insurance = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -186,7 +190,8 @@ const Insurance = () => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -229,6 +234,8 @@ const Insurance = () => {
       ]);
 
       setData(processedData);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -272,6 +279,8 @@ const Insurance = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

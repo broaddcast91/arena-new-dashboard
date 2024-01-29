@@ -79,6 +79,8 @@ const Corporates = () => {
           },
         ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")   
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -144,6 +146,8 @@ const Corporates = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -195,7 +199,8 @@ const Corporates = () => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -242,6 +247,8 @@ const Corporates = () => {
       }));
 
       setData(processedData);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -286,6 +293,8 @@ const Corporates = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

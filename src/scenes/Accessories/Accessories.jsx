@@ -1,16 +1,12 @@
 import { Box, Button } from "@mui/material";
-
+// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
 import axios from "axios";
-//import date range picker files
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-// import { LocalizationProvider } from "@mui/x-date-pickers";
-// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -22,7 +18,8 @@ import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import TextField from "@mui/material/TextField";
 
-const Finance = () => {
+
+const Accessories = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -32,16 +29,25 @@ const Finance = () => {
   const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
+        // const token = localStorage.getItem("authToken");
+        // if (!token) {
+        //   navigate("/login");
+        //   return;
+        // }
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getfinance"
+          "https://arena-backend-zj42.onrender.com/getAccessories",
+          // 
+          //   headers: { Authorization: `Bearer ${token}` },
+          // }
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.25 },
+          { field: "id", headerName: "ID", flex: 0.5 },
           {
             field: "name",
             headerName: "Name",
@@ -58,94 +64,75 @@ const Finance = () => {
             headerName: "Email",
             flex: 1,
           },
+          {
+            field: "product",
+            headerName: "Product",
+            flex: 1,
+          },
 
           {
-            field: "loan_amount",
-            headerName: "Loan Amount",
-            flex: 0.75,
-          },
-          {
-            field: "loan_duration",
-            headerName: "Loan Duration",
-            flex: 0.75,
-          },
-          {
-            field: "comments",
-            headerName: "Message",
-            flex: 1.5,
-          },
-  
-          {
-            field: "purchase_time",
-            headerName: "Purchase Time",
-            flex: 0.75,
-          },
-          {
             field: "model",
-            headerName: "Vehicle",
-            flex: 0.75,
+            headerName: "Model",
+            flex: 1,
           },
           {
             field: "date",
             headerName: "Date",
-            flex: 0.75,
+            flex: 1,
           },
-
           {
             field: "time",
             headerName: "Time",
-            flex: 0.75,
+            flex: 1,
           },
         ]);
         setData(res.data.data);
         setStartDate("")
-        setEndDate("")
+      setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
+        // window.alert("token expired")
+        // navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
   });
 
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+  
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
 
- const handleStartDateChange = (event) => {
-  setStartDate(event.target.value);
-};
-
-const handleEndDateChange = (event) => {
-  setEndDate(event.target.value);
-};
-
-  async function fetchUniqueValues(startDate, endDate) {
+  useEffect(() => {
+  async function fetchUniqueValues() {
     try {
       setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      const res = await axios.post(
-        "https://arena-backend-zj42.onrender.com/financeRange",
+      // const token = localStorage.getItem("authToken");
+      // if (!token) {
+      //   navigate("/login");
+      //   return;
+      // }
+        const res = await axios.post(
+        "https://arena-backend-zj42.onrender.com/accessoriesRangeData",
         {
           startDate: startDate,
           endDate: endDate,
-        }
+        },
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.5 },
         {
           field: "name",
           headerName: "Name",
@@ -162,69 +149,60 @@ const handleEndDateChange = (event) => {
           headerName: "Email",
           flex: 1,
         },
-
         {
-          field: "loan_amount",
-          headerName: "Loan Amount",
-          flex: 0.75,
-        },
-        {
-          field: "loan_duration",
-          headerName: "Loan Duration",
-          flex: 0.75,
-        },
-        {
-          field: "comments",
-          headerName: "Message",
-          flex: 1.5,
+          field: "product",
+          headerName: "Product",
+          flex: 1,
         },
 
-        {
-          field: "purchase_time",
-          headerName: "Purchase Time",
-          flex: 0.75,
-        },
         {
           field: "model",
-          headerName: "Vehicle",
-          flex: 0.75,
+          headerName: "Model",
+          flex: 1,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          flex: 1,
         },
-
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          flex: 1,
         },
       ]);
       setData(res.data.data);
-      setStartDate("")
-        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
+      // window.alert("token expired");
+      // navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate,navigate ]);
 
   const handleReset = async () => {
     try {
       setLoading(true);
+      // const token = localStorage.getItem("authToken");
+      // if (!token) {
+      //   window.location.href = "/login";
+      //   return;
+      // }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getfinance"
+        "https://arena-backend-zj42.onrender.com/getAccessories",
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.5 },
         {
           field: "name",
           headerName: "Name",
@@ -241,42 +219,26 @@ const handleEndDateChange = (event) => {
           headerName: "Email",
           flex: 1,
         },
+        {
+          field: "product",
+          headerName: "Product",
+          flex: 1,
+        },
 
         {
-          field: "loan_amount",
-          headerName: "Loan Amount",
-          flex: 0.75,
-        },
-        {
-          field: "loan_duration",
-          headerName: "Loan Duration",
-          flex: 0.75,
-        },
-        {
-          field: "comments",
-          headerName: "Message",
-          flex: 1.5,
-        },
-        {
-          field: "purchase_time",
-          headerName: "Purchase Time",
-          flex: 0.75,
-        },
-        {
           field: "model",
-          headerName: "Vehicle",
-          flex: 0.75,
+          headerName: "Model",
+          flex: 1,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          flex: 1,
         },
-
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          flex: 1,
         },
       ]);
       setData(res.data.data);
@@ -285,6 +247,8 @@ const handleEndDateChange = (event) => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      // window.alert("token expired")
+      // navigate("/login");
       setLoading(false);
     }
   };
@@ -292,23 +256,25 @@ const handleEndDateChange = (event) => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      // const token = localStorage.getItem("authToken");
+      // if (!token) {
+      //   navigate("/login");
+      //   return;
+      // }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/duplicateFinance"
+        "https://arena-backend-zj42.onrender.com/dupeAccessories",
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
 
-      // Process the response data to create rows with phoneNumber, model, and count
-      const processedData = [];
-      let idCounter = 1;
-
-      res.data.data.forEach((item) => {
-        processedData.push({
-          id: idCounter++,
-          phoneNumber: item.number,
-          model: item.model || "N/A",
-          count: item.count,
-          date: item.date, // Adding the date field
-        });
-      });
+      // Process the response data to create rows
+      const processedData = res.data.data.map((item, index) => ({
+        id: index + 1,
+        date: item.date,
+        phoneNumber: item.number,
+        count: item.count,
+      }));
 
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -318,28 +284,39 @@ const handleEndDateChange = (event) => {
           flex: 1,
           cellClassName: "phone-column--cell",
         },
-        // { field: 'model', headerName: 'Model', flex: 1 },
         { field: "count", headerName: "Count", flex: 1 },
-        { field: "date", headerName: "Date", flex: 1 }, // Adding the date column
+        { field: "date", headerName: "Date", flex: 1 },
+
+        {},
       ]);
 
       setData(processedData);
       setStartDate("")
-        setEndDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
+      // window.alert("token expired")
+      // navigate("/login");
       setLoading(false);
     }
   };
   const uniqueEntries = async () => {
     try {
       setLoading(true);
+      // const token = localStorage.getItem("authToken");
+      // if (!token) {
+      //   navigate("/login");
+      //   return;
+      // }
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/financeUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/accessoriesUniqueEntries`,
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.5 },
         {
           field: "name",
           headerName: "Name",
@@ -356,54 +333,40 @@ const handleEndDateChange = (event) => {
           headerName: "Email",
           flex: 1,
         },
-
         {
-          field: "loan_amount",
-          headerName: "Loan Amount",
-          flex: 0.75,
-        },
-        {
-          field: "loan_duration",
-          headerName: "Loan Duration",
-          flex: 0.75,
-        },
-        {
-          field: "comments",
-          headerName: "Message",
-          flex: 1.5,
+          field: "product",
+          headerName: "Product",
+          flex: 1,
         },
 
-        {
-          field: "purchase_time",
-          headerName: "Purchase Time",
-          flex: 0.75,
-        },
         {
           field: "model",
-          headerName: "Vehicle",
-          flex: 0.75,
+          headerName: "Model",
+          flex: 1,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          flex: 1,
         },
-
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          flex: 1,
         },
       ]);
       setData(res.data.data);
       setStartDate("")
-        setEndDate("")
+      setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);
+      // window.alert("token expired")
+      // navigate("/login");
       setLoading(false);
     }
   };
+
   const handleDownloadCSV = () => {
     const csvData = [];
     const headers = col.map((column) => column.headerName);
@@ -421,7 +384,7 @@ const handleEndDateChange = (event) => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = "Finance(Arena).csv";
+    a.download = "Accessories(arena).csv";
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -463,8 +426,8 @@ const handleEndDateChange = (event) => {
         }}
       >
         <Header
-          title="Finance"
-          subtitle="List of Finance Price for Future Reference"
+          title="Acessories"
+          subtitle="Data form contact us form"
         />
         <div style={{ display: "flex", alignItems: "center" }}>
         <div style={{ marginRight: "10px" }}>
@@ -492,6 +455,7 @@ const handleEndDateChange = (event) => {
               sx={{ margin: "10px" }}
             />
           </div>
+
           <Button
             variant="contained"
             color="primary"
@@ -667,4 +631,4 @@ const handleEndDateChange = (event) => {
   );
 };
 
-export default Finance;
+export default Accessories;

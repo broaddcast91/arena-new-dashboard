@@ -74,6 +74,8 @@ const Popup = () => {
           },
         ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -149,6 +151,8 @@ const Popup = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -210,7 +214,8 @@ const Popup = () => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -246,6 +251,8 @@ const Popup = () => {
       ]);
 
       setData(processedData);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -297,6 +304,8 @@ const Popup = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

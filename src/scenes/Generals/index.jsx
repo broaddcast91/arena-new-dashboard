@@ -84,6 +84,8 @@ const Generals = () => {
             },
           ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -176,6 +178,8 @@ const handleEndDateChange = (event) => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -243,7 +247,8 @@ const handleEndDateChange = (event) => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -285,7 +290,9 @@ const handleEndDateChange = (event) => {
         { field: "date", headerName: "Date", flex: 1 }, // Adding the date column
       ]);
 
-      setData(processedData);
+      setData(processedData); 
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -346,6 +353,8 @@ const handleEndDateChange = (event) => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

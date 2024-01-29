@@ -78,6 +78,8 @@ const DrvingSchool = () => {
           },
         ]);
         setData(res.data.data);
+        setStartDate("")
+        setEndDate("")
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -158,6 +160,8 @@ const DrvingSchool = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -214,7 +218,8 @@ const DrvingSchool = () => {
         },
       ]);
       setData(res.data.data);
-
+      setStartDate("")
+      setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -252,6 +257,8 @@ const DrvingSchool = () => {
       ]);
 
       setData(processedData);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -301,6 +308,8 @@ const DrvingSchool = () => {
         },
       ]);
       setData(res.data.data);
+      setStartDate("")
+        setEndDate("")
       setLoading(false);
     } catch (error) {
       setError(error);

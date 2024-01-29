@@ -17,6 +17,7 @@ import Login from './components/Login/Login';
 import SabooGroups from './scenes/SabooGroups'
 import Generals from './scenes/Generals';
 import ContactUs from './scenes/ContactUs';
+import Accessories from './scenes/Accessories/Accessories';
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -57,6 +58,7 @@ function App() {
               <Route path='/drvingschool' element={<DrvingSchool />} />
               <Route path='/contactus' element={<ContactUs />} />
               <Route path='/general' element={<Generals />} />
+              <Route path='/accessories' element={<Accessories />} />
               <Route path='/saboogroups' element={<SabooGroups />} />
               <Route path='/logout' element={<Logout />} />
               <Route path='/login' element={<Login />} />
