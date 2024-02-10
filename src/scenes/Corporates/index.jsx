@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { tokens } from "../../theme";
-// import { mockDataContacts } from "../../data/mockData";
+import { useNavigate } from "react-router-dom";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
@@ -31,18 +31,25 @@ const Corporates = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
-
   const [col, setCol] = useState([]);
-
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+           navigate("/login");
+          return;
+        }
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getCorporate"
+          "https://arena-backend-zj42.onrender.com/getCorporate",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
@@ -84,11 +91,13 @@ const Corporates = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        window.alert("token expired")
+        navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
@@ -101,17 +110,23 @@ const Corporates = () => {
     setEndDate(event.target.value);
   };
   
-
-  async function fetchUniqueValues(startDate, endDate) {
+  useEffect(() => {
+  async function fetchUniqueValues() {
     try {
       setLoading(true);
-      
-
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/corporateRange",
         {
           startDate: startDate,
           endDate: endDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setCol([
@@ -151,21 +166,31 @@ const Corporates = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, navigate]);
 
   const handleReset = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getCorporate"
+        "https://arena-backend-zj42.onrender.com/getCorporate",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -204,6 +229,8 @@ const Corporates = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -211,8 +238,17 @@ const Corporates = () => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupesCorporate"
+        "https://arena-backend-zj42.onrender.com/dupesCorporate",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -252,14 +288,24 @@ const Corporates = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
   const uniqueEntries = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/corporateUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/corporateUniqueEntries`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -298,6 +344,8 @@ const Corporates = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };

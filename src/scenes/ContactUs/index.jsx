@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 // import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
-
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -34,13 +34,22 @@ const ContactUs = () => {
   const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+           navigate("/login");
+          return;
+        }
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getContactUs"
+          "https://arena-backend-zj42.onrender.com/getContactUs",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.25 },
@@ -97,11 +106,12 @@ const ContactUs = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
@@ -115,26 +125,23 @@ const ContactUs = () => {
     setEndDate(event.target.value);
   };
   
-  async function fetchUniqueValues(startDate, endDate) {
+  useEffect(() => {
+  async function fetchUniqueValues() {
     try {
       setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.post(
-        "https://arena-backend-zj42.onrender.com/drivingSchoolRange",
+        "https://arena-backend-zj42.onrender.com/contactUsRange",
         {
           startDate: startDate,
           endDate: endDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setCol([
@@ -179,21 +186,30 @@ const ContactUs = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, navigate]);
 
   const handleReset = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getContactUs"
+        "https://arena-backend-zj42.onrender.com/getContactUs",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -237,6 +253,7 @@ const ContactUs = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -244,8 +261,16 @@ const ContactUs = () => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupesDrivingSchool"
+        "https://arena-backend-zj42.onrender.com/dupesContactUs",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows
@@ -276,14 +301,24 @@ const ContactUs = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
   const uniqueEntries = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
+
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/drivingSchoolUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/contactUsUniqueEntries`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -327,6 +362,7 @@ const ContactUs = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
+      navigate("/login");
       setLoading(false);
     }
   };

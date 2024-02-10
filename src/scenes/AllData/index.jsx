@@ -214,7 +214,10 @@ const AllData = () => {
           return;
         }
       const res = await axios.get(
-        'https://arena-backend-zj42.onrender.com/allData'
+        'https://arena-backend-zj42.onrender.com/allData',
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const unifiedData = res.data.data.map((item) => {
         const { Last_Name, name, Phone, Mobile, phone, model, ...rest } = item;
@@ -284,7 +287,10 @@ const AllData = () => {
         return;
       }
       const res = await axios.get(
-        'https://arena-backend-zj42.onrender.com/findDuplicatesInAllCollections'
+        'https://arena-backend-zj42.onrender.com/findDuplicatesInAllCollections',
+         {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows with phoneNumber, model, and count
@@ -322,6 +328,7 @@ const AllData = () => {
       setEndDate("")
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -498,29 +505,7 @@ const CustomToolbar = () => {
             Duplicates
           </Button>
 
-          {/* <input
-            type='date'
-            required
-            sx={{ mr: 2, backgroundColor: '#940004' }}
-            value={inputValue}
-            onChange={(e) => {
-              const newInputValue = e.target.value;
-              console.log('New input value:', newInputValue);
-              setInputValue(newInputValue);
-              handleRemoveDuplicates(newInputValue);
-            }}
-            style={{
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '6px',
-              border: 'none',
-              padding: '6px',
-              margin: '15px', // Add margin to separate input and button
-              flex: 1,
-              // Allow the input to grow to fill available space
-            }}
-          /> */}
-
+           
           <Button
             variant="contained"
             color="primary"

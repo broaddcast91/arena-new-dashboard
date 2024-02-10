@@ -35,16 +35,16 @@ const Accessories = () => {
     async function fetchData() {
       try {
         setLoading(true);
-        // const token = localStorage.getItem("authToken");
-        // if (!token) {
-        //   navigate("/login");
-        //   return;
-        // }
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+          navigate("/login");
+          return;
+        }
         const res = await axios.get(
           "https://arena-backend-zj42.onrender.com/getAccessories",
-          // 
-          //   headers: { Authorization: `Bearer ${token}` },
-          // }
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
@@ -92,8 +92,8 @@ const Accessories = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
-        // window.alert("token expired")
-        // navigate("/login");
+        window.alert("token expired")
+        navigate("/login");
         setLoading(false);
       }
     }
@@ -116,20 +116,20 @@ const Accessories = () => {
   async function fetchUniqueValues() {
     try {
       setLoading(true);
-      // const token = localStorage.getItem("authToken");
-      // if (!token) {
-      //   navigate("/login");
-      //   return;
-      // }
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
         const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/accessoriesRangeData",
         {
           startDate: startDate,
           endDate: endDate,
         },
-        // {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -175,8 +175,8 @@ const Accessories = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
-      // window.alert("token expired");
-      // navigate("/login");
+      window.alert("token expired");
+      navigate("/login");
       setLoading(false);
     }
   }
@@ -190,16 +190,16 @@ const Accessories = () => {
   const handleReset = async () => {
     try {
       setLoading(true);
-      // const token = localStorage.getItem("authToken");
-      // if (!token) {
-      //   window.location.href = "/login";
-      //   return;
-      // }
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        window.location.href = "/login";
+        return;
+      }
       const res = await axios.get(
         "https://arena-backend-zj42.onrender.com/getAccessories",
-        // {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -247,8 +247,8 @@ const Accessories = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
-      // window.alert("token expired")
-      // navigate("/login");
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -256,16 +256,16 @@ const Accessories = () => {
   const handleDup = async () => {
     try {
       setLoading(true);
-      // const token = localStorage.getItem("authToken");
-      // if (!token) {
-      //   navigate("/login");
-      //   return;
-      // }
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
       const res = await axios.get(
         "https://arena-backend-zj42.onrender.com/dupeAccessories",
-        // {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows
@@ -296,24 +296,24 @@ const Accessories = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
-      // window.alert("token expired")
-      // navigate("/login");
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
   const uniqueEntries = async () => {
     try {
       setLoading(true);
-      // const token = localStorage.getItem("authToken");
-      // if (!token) {
-      //   navigate("/login");
-      //   return;
-      // }
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
       const res = await axios.get(
         `https://arena-backend-zj42.onrender.com/accessoriesUniqueEntries`,
-        // {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -361,8 +361,8 @@ const Accessories = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
-      // window.alert("token expired")
-      // navigate("/login");
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };

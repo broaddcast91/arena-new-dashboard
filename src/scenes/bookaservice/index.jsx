@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 // import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
-
+import { useNavigate } from "react-router-dom";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
@@ -31,13 +31,22 @@ const BookAService = () => {
   const [endDate, setEndDate] = useState(null);
 
   const [col, setCol] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        setLoading(true);
+        setLoading(true)
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+           navigate("/login");
+          return;
+        };
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getService"
+          "https://arena-backend-zj42.onrender.com/getService",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
@@ -82,11 +91,12 @@ const BookAService = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
@@ -102,26 +112,23 @@ const handleEndDateChange = (event) => {
   setEndDate(event.target.value);
 };
 
-  async function fetchUniqueValues(startDate, endDate) {
+useEffect(() => {
+  async function fetchUniqueValues() {
     try {
       setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/login");
+       return;
+     }
       const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/serviceRangeData",
         {
           startDate: startDate,
           endDate: endDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setCol([
@@ -167,20 +174,29 @@ const handleEndDateChange = (event) => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, navigate]);
   const handleReset = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getService"
+        "https://arena-backend-zj42.onrender.com/getService",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -225,6 +241,7 @@ const handleEndDateChange = (event) => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -232,8 +249,16 @@ const handleEndDateChange = (event) => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupeService"
+        "https://arena-backend-zj42.onrender.com/dupeService",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows with phoneNumber, model, and count

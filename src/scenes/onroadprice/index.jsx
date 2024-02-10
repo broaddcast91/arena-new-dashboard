@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-// import { DataGrid,  } from '@mui/x-data-grid';
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 // import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
@@ -34,13 +34,22 @@ const OnRoadPrice = () => {
   const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+           navigate("/login");
+          return;
+        }
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getOnRoadPrice"
+          "https://arena-backend-zj42.onrender.com/getOnRoadPrice",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
@@ -94,11 +103,12 @@ const OnRoadPrice = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
@@ -113,26 +123,23 @@ const OnRoadPrice = () => {
     setEndDate(event.target.value);
   };
 
-  async function fetchUniqueValues(startDate, endDate) {
+  useEffect(() => {
+  async function fetchUniqueValues() {
     try {
-      // setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
 
       const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/onRoadPriceRange",
         {
           startDate: startDate,
           endDate: endDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setCol([
@@ -187,84 +194,32 @@ const OnRoadPrice = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate,navigate]);
 
-  // async function fetchData(newInputValue) {
-  //   try {
-  //     setLoading(true);
-  //     const res = await axios.get(
-  //       `https://autozone-8azp.onrender.com/getOnRoadPrice?date=${newInputValue}`
-  //     );
-  //     setCol([
-  //       { field: 'id', headerName: 'ID', flex: 0.5 },
-  //       {
-  //         field: 'date',
-  //         headerName: 'Date',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'time',
-  //         headerName: 'Time',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'name',
-  //         headerName: 'Name',
-  //         flex: 1,
-  //         cellClassName: 'name-column--cell',
-  //       },
 
-  //       {
-  //         field: 'mobile',
-  //         headerName: 'Phone Number',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'email',
-  //         headerName: 'Email',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'vehicle',
-  //         headerName: 'Vehicle',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'outlet',
-  //         headerName: 'Outlet',
-  //         flex: 1,
-  //       },
-  //       {
-  //         field: 'enquiry',
-  //         headerName: 'Enquiry',
-  //         flex: 1,
-  //       },
-  //     ]);
-  //     setData(res.data.data);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     setError(err);
-  //     setLoading(false);
-  //   }
-  // }
-  // const handleRemoveDuplicates = (newInputValue) => {
-  //   //if (inputValue === '') alert('Please select the date');
-  //   //else
-  //   fetchData(newInputValue);
-  // };
   const handleReset = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getOnRoadPrice"
+        "https://arena-backend-zj42.onrender.com/getOnRoadPrice",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+        
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -318,6 +273,7 @@ const OnRoadPrice = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -325,8 +281,16 @@ const OnRoadPrice = () => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/duplicateOnRoadPrice"
+        "https://arena-backend-zj42.onrender.com/duplicateOnRoadPrice",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows with phoneNumber, model, and count
@@ -362,14 +326,23 @@ const OnRoadPrice = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      navigate("/login");
       setLoading(false);
     }
   };
   const uniqueEntries = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/onRoadPriceUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/onRoadPriceUniqueEntries`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -423,6 +396,7 @@ const OnRoadPrice = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
+      navigate("/login");
       setLoading(false);
     }
   };

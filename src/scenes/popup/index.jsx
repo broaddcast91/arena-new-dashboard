@@ -1,5 +1,5 @@
 import { Box, Button, useTheme } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
@@ -28,13 +28,22 @@ const Popup = () => {
   const [col, setCol] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+           navigate("/login");
+          return;
+        }
         const res = await axios.get(
-          "https://arena-backend-zj42.onrender.com/getPopups"
+          "https://arena-backend-zj42.onrender.com/getPopups",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setCol([
           { field: "id", headerName: "ID", flex: 0.5 },
@@ -79,38 +88,36 @@ const Popup = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        window.alert("token expired")
+        navigate("/login");
         setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   let newData = data.map((item, index) => {
     return { ...item, id: index + 1 };
   });
 
   //date range unique function
-
-  async function fetchUniqueValues(startDate, endDate) {
+  useEffect(() => {
+  async function fetchUniqueValues() {
     try {
       setLoading(true);
-      // const formattedStartDate = new Date(startDate);
-      // formattedStartDate.setDate(formattedStartDate.getDate() + 1);
-      // const formattedStartDateString = formattedStartDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
-      // const formattedEndDate = new Date(endDate);
-      // formattedEndDate.setDate(formattedEndDate.getDate() + 1);
-      // const formattedEndDateString = formattedEndDate
-      //   .toISOString()
-      //   .slice(0, 10);
-
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.post(
         "https://arena-backend-zj42.onrender.com/popupRangeEntries",
         {
           startDate: startDate,
           endDate: endDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setCol([
@@ -156,21 +163,31 @@ const Popup = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   }
 
-  useEffect(() => {
+ 
     if (startDate && endDate) {
-      fetchUniqueValues(startDate, endDate);
+      fetchUniqueValues();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, navigate]);
 
   const handleReset = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/getpopups"
+        "https://arena-backend-zj42.onrender.com/getpopups",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       setStartDate(null);
@@ -219,6 +236,8 @@ const Popup = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -226,8 +245,16 @@ const Popup = () => {
   const handleDup = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
       const res = await axios.get(
-        "https://arena-backend-zj42.onrender.com/dupilicatepopups"
+        "https://arena-backend-zj42.onrender.com/dupilicatepopups",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       // Process the response data to create rows with unique phoneNumber and count combinations
@@ -256,6 +283,8 @@ const Popup = () => {
       setLoading(false);
     } catch (err) {
       setError(err);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
@@ -263,8 +292,17 @@ const Popup = () => {
   const uniqueEntries = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+         navigate("/login");
+        return;
+      }
+
       const res = await axios.get(
-        `https://arena-backend-zj42.onrender.com/popUpUniqueEntries`
+        `https://arena-backend-zj42.onrender.com/popUpUniqueEntries`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
@@ -309,6 +347,8 @@ const Popup = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
+      window.alert("token expired")
+      navigate("/login");
       setLoading(false);
     }
   };
