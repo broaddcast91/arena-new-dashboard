@@ -8,11 +8,6 @@ import { useEffect, useState } from "react";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import axios from "axios";
 
-//import date range picker files
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-// import { LocalizationProvider } from "@mui/x-date-pickers";
-// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -56,7 +51,7 @@ const ContactUs = () => {
           {
             field: "name",
             headerName: "Name",
-            flex: 0.75,
+            flex: 0.85,
           },
           {
             field: "phone",
@@ -82,7 +77,7 @@ const ContactUs = () => {
           {
             field: "message",
             headerName: "Message",
-            flex: 2.5,
+            flex: 3.75,
           },
           {
             field: "outlet",
@@ -97,7 +92,7 @@ const ContactUs = () => {
           {
             field: "time",
             headerName: "Time",
-            flex:  0.75,
+            flex:  0.5,
           },
         ]);
         setData(res.data.data);
@@ -145,39 +140,52 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
           field: "name",
           headerName: "Name",
-          flex: 1,
-          cellClassName: "name-column--cell",
+          flex: 0.85,
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          flex: 0.75,
           cellClassName: "phone-column--cell",
         },
         {
           field: "email",
           headerName: "Email",
+          flex: 0.75,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          flex:  0.75,
+        },
+        {
+          field: "subject",
+          headerName: "Subject",
           flex: 1,
         },
-
+        {
+          field: "message",
+          headerName: "Message",
+          flex: 3.75,
+        },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex:  0.5,
         },
       ]);
       setData(res.data.data);
@@ -212,39 +220,52 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
           field: "name",
           headerName: "Name",
-          flex: 1,
-          cellClassName: "name-column--cell",
+          flex: 0.85,
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          flex: 0.75,
           cellClassName: "phone-column--cell",
         },
         {
           field: "email",
           headerName: "Email",
+          flex: 0.75,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          flex:  0.75,
+        },
+        {
+          field: "subject",
+          headerName: "Subject",
           flex: 1,
         },
-
+        {
+          field: "message",
+          headerName: "Message",
+          flex: 3.75,
+        },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex:  0.5,
         },
       ]);
       setData(res.data.data);
@@ -321,39 +342,52 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25 },
         {
           field: "name",
           headerName: "Name",
-          flex: 1,
-          cellClassName: "name-column--cell",
+          flex: 0.85,
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          flex: 0.75,
           cellClassName: "phone-column--cell",
         },
         {
           field: "email",
           headerName: "Email",
+          flex: 0.75,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          flex:  0.75,
+        },
+        {
+          field: "subject",
+          headerName: "Subject",
           flex: 1,
         },
-
+        {
+          field: "message",
+          headerName: "Message",
+          flex: 3.75,
+        },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex:  0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex:  0.5,
         },
       ]);
       setData(res.data.data);
@@ -369,7 +403,7 @@ const ContactUs = () => {
 
   const handleDownloadCSV = () => {
     const csvData = [];
-    const headers = col.map((column) => column.headerName);
+    const headers = col.map((column) => `"${column.headerName}"`);
     csvData.push(headers);
 
     newData.forEach((item) => {
@@ -525,28 +559,7 @@ const ContactUs = () => {
           >
             Reset
           </Button>
-          {/* <Button
-            variant='contained'
-            color='primary'
-            sx={{ ml: 2, backgroundColor: '#940004' }}
-            onClick={handleRemoveDuplicates}
-          >
-            Unique
-          </Button>
-          <input
-            type='date'
-            required
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            style={{
-              marginLeft: '16px',
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '8px',
-              border: 'none',
-              padding: '8px',
-            }}
-          /> */}
+       
         </div>
       </div>
 
@@ -588,12 +601,17 @@ const ContactUs = () => {
           "& .MuiDataGrid-sortIcon": {
             color: "white",
           },
-          // "& .MuiDataGrid-cell": {
-          //   //borderBottom: "none",
-          //   backgroundColor: "white",
-          //   borderBottom: "1px solid #ccc", // Add a border to table cells
-          // },
-
+          "& .MuiDataGrid-cell": {
+            whiteSpace: "pre-wrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            lineHeight: 1.2,
+          },
+  
+          "& .MuiDataGrid-viewport": {
+            height: "calc(100% - 48px)",
+          },
+          
           "& .css-196n7va-MuiSvgIcon-root": {
             color: "white",
           },
@@ -605,26 +623,38 @@ const ContactUs = () => {
           "Error ~ Something went wrong :)"
         ) : (
           <DataGrid
-            rows={newData}
-            columns={col.map((column) => ({
-              ...column,
-              renderCell: (params) => (
-                <div
-                  style={{
-                    whiteSpace: "pre-wrap", // Enable word wrapping
-                    overflow: "hidden", // Hide overflow content
-                    textOverflow: "ellipsis", // Show ellipsis for overflow
-                  }}
-                >
-                  {params.value}
-                </div>
-              ),
-            }))}
-            components={{ Toolbar: CustomToolbar }}
-            sx={{
-              backgroundColor: "white", // Set the background color to white
-            }}
-          />
+          rows={newData}
+          columns={col.map((column) => ({
+            ...column,
+            renderCell: (params) => (
+              <div
+                style={{
+                  whiteSpace: "pre-wrap",
+                }}
+              >
+                {params.value}
+              </div>
+            ),
+          }))}
+          components={{ Toolbar: CustomToolbar }}
+          getRowHeight={(params) => {
+            const lineHeight = 1.6;
+            if (params && params.model && params.model.message) {
+              // console.log(params.model.message.join(''))
+              const lines = params.model.message.split('\n');
+              const lineCount = lines.length;
+              const rowHeight = lineCount * lineHeight * 18;
+              console.log("Row Height:", rowHeight, "Line Count:", lineCount);
+              return lineCount === 1 ? 50 : rowHeight;
+            }
+            return 50; 
+          //  console.log(params.model.message.join(''))
+          }}
+          sx={{
+            backgroundColor: "white",
+            height: "100%",
+          }}
+        />
         )}
       </Box>
     </Box>
@@ -632,3 +662,6 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+
+
