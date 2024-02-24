@@ -47,7 +47,7 @@ const ContactUs = () => {
           }
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.25 },
+          { field: "id", headerName: "ID", flex: 0.25, width:80 },
           {
             field: "name",
             headerName: "Name",
@@ -67,32 +67,38 @@ const ContactUs = () => {
           {
             field: "model",
             headerName: "Model",
-            flex:  0.75,
+            // flex:  0.75,
+            width:150
           },
           {
             field: "subject",
             headerName: "Subject",
-            flex: 1,
+            flex: 0.5,
+            width:140
           },
           {
             field: "message",
             headerName: "Message",
-            flex: 3.75,
+            // flex: 3.75,
+            width:350
           },
           {
             field: "outlet",
             headerName: "Outlet",
-            flex:  0.75,
+            flex: 0.5,
+            width:120
           },
           {
             field: "date",
             headerName: "Date",
             flex:  0.75,
+            width:120
           },
           {
             field: "time",
             headerName: "Time",
             flex:  0.5,
+            width:100
           },
         ]);
         setData(res.data.data);
@@ -140,7 +146,7 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.25, width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -160,32 +166,38 @@ const ContactUs = () => {
         {
           field: "model",
           headerName: "Model",
-          flex:  0.75,
+          // flex:  0.75,
+          width:150
         },
         {
           field: "subject",
           headerName: "Subject",
-          flex: 1,
+          flex: 0.5,
+          width:140
         },
         {
           field: "message",
           headerName: "Message",
-          flex: 3.75,
+          // flex: 3.75,
+          width:350
         },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex:  0.75,
+          flex: 0.5,
+          width:120
         },
         {
           field: "date",
           headerName: "Date",
           flex:  0.75,
+          width:120
         },
         {
           field: "time",
           headerName: "Time",
           flex:  0.5,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -220,7 +232,7 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.25, width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -240,32 +252,38 @@ const ContactUs = () => {
         {
           field: "model",
           headerName: "Model",
-          flex:  0.75,
+          // flex:  0.75,
+          width:150
         },
         {
           field: "subject",
           headerName: "Subject",
-          flex: 1,
+          flex: 0.5,
+          width:140
         },
         {
           field: "message",
           headerName: "Message",
-          flex: 3.75,
+          // flex: 3.75,
+          width:350
         },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex:  0.75,
+          flex: 0.5,
+          width:120
         },
         {
           field: "date",
           headerName: "Date",
           flex:  0.75,
+          width:120
         },
         {
           field: "time",
           headerName: "Time",
           flex:  0.5,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -303,17 +321,59 @@ const ContactUs = () => {
       }));
 
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", flex: 0.25, width:80 },
         {
-          field: "phoneNumber",
+          field: "name",
+          headerName: "Name",
+          flex: 0.85,
+        },
+        {
+          field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          flex: 0.75,
           cellClassName: "phone-column--cell",
         },
-        { field: "count", headerName: "Count", flex: 1 },
-        { field: "date", headerName: "Date", flex: 1 },
-
-        {},
+        {
+          field: "email",
+          headerName: "Email",
+          flex: 0.75,
+        },
+        {
+          field: "model",
+          headerName: "Model",
+          // flex:  0.75,
+          width:150
+        },
+        {
+          field: "subject",
+          headerName: "Subject",
+          flex: 0.5,
+          width:140
+        },
+        {
+          field: "message",
+          headerName: "Message",
+          // flex: 3.75,
+          width:350
+        },
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 0.5,
+          width:120
+        },
+        {
+          field: "date",
+          headerName: "Date",
+          flex:  0.75,
+          width:120
+        },
+        {
+          field: "time",
+          headerName: "Time",
+          flex:  0.5,
+          width:100
+        },
       ]);
 
       setData(processedData);
@@ -342,7 +402,7 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", flex: 0.25, width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -362,32 +422,38 @@ const ContactUs = () => {
         {
           field: "model",
           headerName: "Model",
-          flex:  0.75,
+          // flex:  0.75,
+          width:150
         },
         {
           field: "subject",
           headerName: "Subject",
-          flex: 1,
+          flex: 0.5,
+          width:140
         },
         {
           field: "message",
           headerName: "Message",
-          flex: 3.75,
+          // flex: 3.75,
+          width:350
         },
         {
           field: "outlet",
           headerName: "Outlet",
-          flex:  0.75,
+          flex: 0.5,
+          width:120
         },
         {
           field: "date",
           headerName: "Date",
           flex:  0.75,
+          width:120
         },
         {
           field: "time",
           headerName: "Time",
           flex:  0.5,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -418,7 +484,7 @@ const ContactUs = () => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = "Driving_School(Arena).csv";
+    a.download = "contact_us(Arena).csv";
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -564,8 +630,8 @@ const ContactUs = () => {
       </div>
 
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        // m="40px 0 0 0"
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -579,9 +645,9 @@ const ContactUs = () => {
             color: "white",
             backgroundColor: colors.blueAccent[700], // Optional background color for headers
           },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.sabooAutoColors[400],
-          },
+          // "& .MuiDataGrid-virtualScroller": {
+          //   backgroundColor: colors.sabooAutoColors[400],
+          // },
           // "& .MuiDataGrid-footerContainer": {
           //   borderTop: "none",
           //   backgroundColor: colors.blueAccent[700],
@@ -615,6 +681,23 @@ const ContactUs = () => {
           "& .css-196n7va-MuiSvgIcon-root": {
             color: "white",
           },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.sabooAutoColors[400],
+            overflowX: "auto",
+            "&::-webkit-scrollbar": {
+              height: "7px",
+              width: "7px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `${colors.sabooAutoColors[700]} !important`,
+              borderRadius: "100px",
+              height: "5px",
+              
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: colors.grey[100],
+            },
+          },
         }}
       >
         {loading ? (
@@ -626,6 +709,7 @@ const ContactUs = () => {
           rows={newData}
           columns={col.map((column) => ({
             ...column,
+            minWidth: column.width || 200,
             renderCell: (params) => (
               <div
                 style={{
@@ -638,11 +722,11 @@ const ContactUs = () => {
           }))}
           components={{ Toolbar: CustomToolbar }}
           getRowHeight={(params) => {
-            const lineHeight = 1.6;
+            const lineHeight = 2;
             if (params && params.model && params.model.message) {
               // console.log(params.model.message.join(''))
               const lines = params.model.message.split('\n');
-              const lineCount = lines.length;
+              const lineCount = (lines.length )+1
               const rowHeight = lineCount * lineHeight * 18;
               console.log("Row Height:", rowHeight, "Line Count:", lineCount);
               return lineCount === 1 ? 50 : rowHeight;
@@ -653,6 +737,7 @@ const ContactUs = () => {
           sx={{
             backgroundColor: "white",
             height: "100%",
+            fontSize:14
           }}
         />
         )}

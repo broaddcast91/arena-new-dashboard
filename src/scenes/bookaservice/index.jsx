@@ -533,8 +533,8 @@ useEffect(() => {
       </div>
 
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        // m="40px 0 0 0"
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -605,6 +605,7 @@ useEffect(() => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
+              fontSize:14
             }}
           />
         )}

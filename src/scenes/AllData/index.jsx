@@ -553,8 +553,8 @@ const CustomToolbar = () => {
       </div>
       
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        // m="40px 0 0 0"
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -625,7 +625,9 @@ const CustomToolbar = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
+              fontSize:14
             }}
+            
           />
         )}
       </Box>

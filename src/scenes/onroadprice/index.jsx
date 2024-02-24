@@ -506,28 +506,6 @@ const OnRoadPrice = () => {
             Duplicates
           </Button>
 
-          {/* <input
-            type='date'
-            required
-            sx={{ mr: 2, backgroundColor: '#940004' }}
-            value={inputValue}
-            onChange={(e) => {
-              const newInputValue = e.target.value;
-              console.log('New input value:', newInputValue);
-              setInputValue(newInputValue);
-              handleRemoveDuplicates(newInputValue);
-            }}
-            style={{
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '6px',
-              border: 'none',
-              padding: '6px',
-              margin: '15px', // Add margin to separate input and button
-              flex: 1,
-              // Allow the input to grow to fill available space
-            }}
-          /> */}
 
           <Button
             variant="contained"
@@ -559,41 +537,20 @@ const OnRoadPrice = () => {
           >
             Reset
           </Button>
-          {/* <Button
-            variant='contained'
-            color='primary'
-            sx={{ ml: 2, backgroundColor: '#940004' }}
-            onClick={handleRemoveDuplicates}
-          >
-            Unique
-          </Button>
-          <input
-            type='date'
-            required
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            style={{
-              marginLeft: '16px',
-              backgroundColor: '#940004',
-              color: 'white',
-              borderRadius: '8px',
-              border: 'none',
-              padding: '8px',
-            }}
-          /> */}
+     
         </div>
       </div>
 
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        // m="40px 0 0 0"
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
             backgroundColor: "white",
             // border: "1px solid #ccc", // Add a border to the table
           },
-          "& .phone-column--cell": {
+          "& .Mobile-column--cell": {
             color: colors.sabooAutoColors[500],
           },
           "& .MuiDataGrid-columnHeader": {
@@ -657,6 +614,7 @@ const OnRoadPrice = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
+              fontSize:14
             }}
           />
         )}

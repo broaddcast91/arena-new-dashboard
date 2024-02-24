@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem, 
+  // SubMenu
+ } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -14,21 +16,21 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import GroupsIcon from "@mui/icons-material/Groups";
+// import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+// import GroupsIcon from "@mui/icons-material/Groups";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import ConstructionIcon from '@mui/icons-material/Construction';
-const CustomSubMenuTitle = ({ title, icon }) => (
-  <Tooltip title={title} placement="right">
-    <span >
-      {icon}
-      <span >{title}</span>
-    </span>
+// const CustomSubMenuTitle = ({ title, icon }) => (
+//   <Tooltip title={title} placement="right">
+//     <span >
+//       {icon}
+//       <span >{title}</span>
+//     </span>
    
-  </Tooltip>
-);
+//   </Tooltip>
+// );
 
 
 
@@ -154,13 +156,13 @@ const Sidebar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             
-<SubMenu
+{/* <SubMenu
   title={
     <CustomSubMenuTitle title="Arena" icon={<DirectionsCarIcon />} />
   }
   selected={selected}
   setSelected={setSelected}
->
+> */}
               <Item
                 title="Popup"
                 to="/popup"
@@ -238,9 +240,9 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-            </SubMenu>
+            {/* </SubMenu> */}
 
-            <SubMenu
+            {/* <SubMenu
               title={
                 <CustomSubMenuTitle title=" SabooGroups" icon={<GroupsIcon />} />
               }
@@ -254,7 +256,7 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-            </SubMenu>
+            </SubMenu> */}
           </Box>
           <Item
             title="Log Out"

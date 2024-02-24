@@ -484,8 +484,8 @@ const SabooGroups = () => {
       </div>
 
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+       
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -556,6 +556,7 @@ const SabooGroups = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
+              fontSize:14
             }}
           />
         )}

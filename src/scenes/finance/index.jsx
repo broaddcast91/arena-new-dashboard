@@ -50,7 +50,7 @@ const Finance = () => {
           }
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.25 },
+          { field: "id", headerName: "ID", width:80},
           {
             field: "name",
             headerName: "Name",
@@ -81,7 +81,7 @@ const Finance = () => {
           {
             field: "comments",
             headerName: "Message",
-            flex: 1.5,
+           width :300
           },
   
           {
@@ -97,13 +97,13 @@ const Finance = () => {
           {
             field: "date",
             headerName: "Date",
-            flex: 0.75,
+            width:120
           },
 
           {
             field: "time",
             headerName: "Time",
-            flex: 0.75,
+            width:100
           },
         ]);
         setData(res.data.data);
@@ -152,7 +152,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
@@ -183,7 +183,7 @@ useEffect(() => {
         {
           field: "comments",
           headerName: "Message",
-          flex: 1.5,
+         width :300
         },
 
         {
@@ -199,13 +199,13 @@ useEffect(() => {
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:120
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -241,7 +241,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
@@ -272,8 +272,9 @@ useEffect(() => {
         {
           field: "comments",
           headerName: "Message",
-          flex: 1.5,
+         width :300
         },
+
         {
           field: "purchase_time",
           headerName: "Purchase Time",
@@ -287,13 +288,13 @@ useEffect(() => {
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:120
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -376,7 +377,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
@@ -407,7 +408,7 @@ useEffect(() => {
         {
           field: "comments",
           headerName: "Message",
-          flex: 1.5,
+         width :300
         },
 
         {
@@ -423,13 +424,13 @@ useEffect(() => {
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:120
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:100
         },
       ]);
       setData(res.data.data);
@@ -624,8 +625,8 @@ useEffect(() => {
       </div>
 
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        // m="40px 0 0 0"
+        height="83vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -681,6 +682,7 @@ useEffect(() => {
             rows={newData}
             columns={col.map((column) => ({
               ...column,
+              minWidth: column.width || 200,
               renderCell: (params) => (
                 <div
                   style={{
@@ -696,6 +698,7 @@ useEffect(() => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
+              fontSize:14
             }}
           />
         )}
