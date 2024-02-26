@@ -89,6 +89,16 @@ const ContactUs = () => {
             width:120
           },
           {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
+          },
+          {
             field: "date",
             headerName: "Date",
             flex:  0.75,
@@ -188,6 +198,16 @@ const ContactUs = () => {
           width:120
         },
         {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
+        {
           field: "date",
           headerName: "Date",
           flex:  0.75,
@@ -232,60 +252,70 @@ const ContactUs = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25, width:80 },
-        {
-          field: "name",
-          headerName: "Name",
-          flex: 0.85,
-        },
-        {
-          field: "phone",
-          headerName: "Phone Number",
-          flex: 0.75,
-          cellClassName: "phone-column--cell",
-        },
-        {
-          field: "email",
-          headerName: "Email",
-          flex: 0.75,
-        },
-        {
-          field: "model",
-          headerName: "Model",
-          // flex:  0.75,
-          width:150
-        },
-        {
-          field: "subject",
-          headerName: "Subject",
-          flex: 0.5,
-          width:140
-        },
-        {
-          field: "message",
-          headerName: "Message",
-          // flex: 3.75,
-          width:350
-        },
-        {
-          field: "outlet",
-          headerName: "Outlet",
-          flex: 0.5,
-          width:120
-        },
-        {
-          field: "date",
-          headerName: "Date",
-          flex:  0.75,
-          width:120
-        },
-        {
-          field: "time",
-          headerName: "Time",
-          flex:  0.5,
-          width:100
-        },
-      ]);
+          { field: "id", headerName: "ID", flex: 0.25, width:80 },
+          {
+            field: "name",
+            headerName: "Name",
+            flex: 0.85,
+          },
+          {
+            field: "phone",
+            headerName: "Phone Number",
+            flex: 0.75,
+            cellClassName: "phone-column--cell",
+          },
+          {
+            field: "email",
+            headerName: "Email",
+            flex: 0.75,
+          },
+          {
+            field: "model",
+            headerName: "Model",
+            // flex:  0.75,
+            width:150
+          },
+          {
+            field: "subject",
+            headerName: "Subject",
+            flex: 0.5,
+            width:140
+          },
+          {
+            field: "message",
+            headerName: "Message",
+            // flex: 3.75,
+            width:350
+          },
+          {
+            field: "outlet",
+            headerName: "Outlet",
+            flex: 0.5,
+            width:120
+          },
+          {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
+          },
+          {
+            field: "date",
+            headerName: "Date",
+            flex:  0.75,
+            width:120
+          },
+          {
+            field: "time",
+            headerName: "Time",
+            flex:  0.5,
+            width:100
+          },
+        ]);
       setData(res.data.data);
       setStartDate("")
       setEndDate("")
@@ -321,59 +351,17 @@ const ContactUs = () => {
       }));
 
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25, width:80 },
+        { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "name",
-          headerName: "Name",
-          flex: 0.85,
-        },
-        {
-          field: "phone",
+          field: "phoneNumber",
           headerName: "Phone Number",
-          flex: 0.75,
+          flex: 1,
           cellClassName: "phone-column--cell",
         },
-        {
-          field: "email",
-          headerName: "Email",
-          flex: 0.75,
-        },
-        {
-          field: "model",
-          headerName: "Model",
-          // flex:  0.75,
-          width:150
-        },
-        {
-          field: "subject",
-          headerName: "Subject",
-          flex: 0.5,
-          width:140
-        },
-        {
-          field: "message",
-          headerName: "Message",
-          // flex: 3.75,
-          width:350
-        },
-        {
-          field: "outlet",
-          headerName: "Outlet",
-          flex: 0.5,
-          width:120
-        },
-        {
-          field: "date",
-          headerName: "Date",
-          flex:  0.75,
-          width:120
-        },
-        {
-          field: "time",
-          headerName: "Time",
-          flex:  0.5,
-          width:100
-        },
+        { field: "count", headerName: "Count", flex: 1 },
+        { field: "date", headerName: "Date", flex: 1 },
+
+      
       ]);
 
       setData(processedData);
@@ -737,7 +725,7 @@ const ContactUs = () => {
           sx={{
             backgroundColor: "white",
             height: "100%",
-            fontSize:14
+            fontSize:15
           }}
         />
         )}

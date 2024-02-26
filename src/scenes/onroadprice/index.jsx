@@ -80,11 +80,16 @@ const OnRoadPrice = () => {
             headerName: "Outlet",
             flex: 1,
           },
-          // {
-          //   field: 'enquiry',
-          //   headerName: 'Enquiry',
-          //   flex: 1,
-          // },
+          {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
+          },
           {
             field: "date",
             headerName: "Date",
@@ -171,11 +176,16 @@ const OnRoadPrice = () => {
           headerName: "Outlet",
           flex: 1,
         },
-        // {
-        //   field: 'enquiry',
-        //   headerName: 'Enquiry',
-        //   flex: 1,
-        // },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
@@ -250,11 +260,16 @@ const OnRoadPrice = () => {
           headerName: "Outlet",
           flex: 1,
         },
-        // {
-        //   field: 'enquiry',
-        //   headerName: 'Enquiry',
-        //   flex: 1,
-        // },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
@@ -373,11 +388,16 @@ const OnRoadPrice = () => {
           headerName: "Outlet",
           flex: 1,
         },
-        // {
-        //   field: 'enquiry',
-        //   headerName: 'Enquiry',
-        //   flex: 1,
-        // },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
@@ -614,7 +634,7 @@ const OnRoadPrice = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
           />
         )}

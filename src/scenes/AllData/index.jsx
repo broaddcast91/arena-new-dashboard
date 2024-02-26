@@ -625,7 +625,7 @@ const CustomToolbar = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
             
           />

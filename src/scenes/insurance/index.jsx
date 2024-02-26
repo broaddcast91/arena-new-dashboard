@@ -59,18 +59,28 @@ const Insurance = () => {
           {
             field: "email",
             headerName: "Email",
-            flex: 1,
+            width :220
+          },
+          {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
           },
 
           {
             field: "date",
             headerName: "Date",
-            flex: 1,
+            flex: 0.75,
           },
           {
             field: "time",
             headerName: "Time",
-            flex: 1,
+            flex: 0.75,
           },
         ]);
         setData(res.data.data);
@@ -123,31 +133,41 @@ const Insurance = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
-          flex: 1,
+          width :220
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
 
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -184,32 +204,41 @@ const Insurance = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
-          cellClassName: "name-column--cell",
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
-          flex: 1,
+          width :220
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
 
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -294,31 +323,41 @@ const Insurance = () => {
       setCol([
         { field: "id", headerName: "ID", flex: 0.5 },
         {
-          field: "Last_Name",
+          field: "name",
           headerName: "Name",
           flex: 1,
         },
         {
-          field: "Phone",
+          field: "phone",
           headerName: "Phone Number",
           flex: 1,
           cellClassName: "phone-column--cell",
         },
         {
-          field: "Email",
+          field: "email",
           headerName: "Email",
-          flex: 1,
+          width :220
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
 
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          flex: 0.75,
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          flex: 0.75,
         },
       ]);
       setData(res.data.data);
@@ -590,7 +629,7 @@ const Insurance = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
             
           />

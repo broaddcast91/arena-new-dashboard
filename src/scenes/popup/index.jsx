@@ -63,18 +63,27 @@ const Popup = () => {
           {
             field: "model",
             headerName: "Model",
-            flex: 1,
+            flex: 0.8,
           },
-
+          {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
+          },
           {
             field: "date",
             headerName: "Date",
-            flex: 1,
+            width:130
           },
           {
             field: "time",
             headerName: "Time",
-            flex: 1,
+           width:130
           },
         ]);
         setData(res.data.data);
@@ -138,18 +147,27 @@ const Popup = () => {
         {
           field: "model",
           headerName: "Model",
-          flex: 1,
+          flex: 0.8,
         },
-
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+         width:130
         },
       ]);
       setData(res.data.data);
@@ -211,18 +229,27 @@ const Popup = () => {
         {
           field: "model",
           headerName: "Model",
-          flex: 1,
+          flex: 0.8,
         },
-
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+         width:130
         },
       ]);
       setData(res.data.data);
@@ -322,18 +349,27 @@ const Popup = () => {
         {
           field: "model",
           headerName: "Model",
-          flex: 1,
+          flex: 0.8,
         },
-
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+         width:130
         },
       ]);
       setData(res.data.data);
@@ -612,7 +648,7 @@ const Popup = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
           />
         )}

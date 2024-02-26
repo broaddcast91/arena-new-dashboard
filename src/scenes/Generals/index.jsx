@@ -45,7 +45,7 @@ const Generals = () => {
           }
         );
         setCol([
-            { field: "id", headerName: "ID", flex: 0.25 },
+            { field: "id", headerName: "ID", width:80 },
             {
               field: "name",
               headerName: "Name",
@@ -54,7 +54,7 @@ const Generals = () => {
             {
               field: "phone",
               headerName: "Phone Number",
-              flex: 1,
+              width:150,
               cellClassName: "phone-column--cell",
             },
             {
@@ -66,15 +66,24 @@ const Generals = () => {
             {
               field: "outlet",
               headerName: "Outlet",
-              flex: 0.75,
+              width:180,
             },
            
             {
               field: "model",
               headerName: "Model",
-              flex: 0.75,
+              width:180,
             },
-
+            {
+              field: "allQuery",
+              headerName: "All Query",
+              width :270
+            },
+            {
+              field: "error",
+              headerName: "Error",
+              width :200
+            },
             {
                 field: "leadFrom",
                 headerName: "Lead From",
@@ -83,13 +92,13 @@ const Generals = () => {
             {
               field: "date",
               headerName: "Date",
-              flex: 0.75,
+              width:140,
             },
     
             {
               field: "time",
               headerName: "Time",
-              flex: 0.75,
+              width:140,
             },
           ]);
         setData(res.data.data);
@@ -139,7 +148,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -148,7 +157,7 @@ useEffect(() => {
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          width:150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -160,13 +169,23 @@ useEffect(() => {
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 0.75,
+          width:180,
         },
        
         {
           field: "model",
           headerName: "Model",
-          flex: 0.75,
+          width:180,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
         {
             field: "leadFrom",
@@ -176,13 +195,13 @@ useEffect(() => {
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:140,
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:140,
         },
       ]);
       setData(res.data.data);
@@ -218,7 +237,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -227,7 +246,7 @@ useEffect(() => {
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          width:150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -239,13 +258,23 @@ useEffect(() => {
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 0.75,
+          width:180,
         },
        
         {
           field: "model",
           headerName: "Model",
-          flex: 0.75,
+          width:180,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
         {
             field: "leadFrom",
@@ -255,13 +284,13 @@ useEffect(() => {
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:140,
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:140,
         },
       ]);
       setData(res.data.data);
@@ -344,7 +373,7 @@ useEffect(() => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.25 },
+        { field: "id", headerName: "ID", width:80 },
         {
           field: "name",
           headerName: "Name",
@@ -353,7 +382,7 @@ useEffect(() => {
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+          width:150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -365,29 +394,39 @@ useEffect(() => {
         {
           field: "outlet",
           headerName: "Outlet",
-          flex: 0.75,
+          width:180,
         },
        
         {
           field: "model",
           headerName: "Model",
-          flex: 0.75,
+          width:180,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
         },
         {
             field: "leadFrom",
             headerName: "Lead From",
             flex: 0.75,
-          }, 
+          },
         {
           field: "date",
           headerName: "Date",
-          flex: 0.75,
+          width:140,
         },
 
         {
           field: "time",
           headerName: "Time",
-          flex: 0.75,
+          width:140,
         },
       ]);
       setData(res.data.data);
@@ -599,9 +638,9 @@ useEffect(() => {
             color: "white",
             backgroundColor: colors.blueAccent[700], // Optional background color for headers
           },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.sabooAutoColors[400],
-          },
+          // "& .MuiDataGrid-virtualScroller": {
+          //   backgroundColor: colors.sabooAutoColors[400],
+          // },
           // "& .MuiDataGrid-footerContainer": {
           //   borderTop: "none",
           //   backgroundColor: colors.blueAccent[700],
@@ -621,12 +660,23 @@ useEffect(() => {
           "& .MuiDataGrid-sortIcon": {
             color: "white",
           },
-          // "& .MuiDataGrid-cell": {
-          //   //borderBottom: "none",
-          //   backgroundColor: "white",
-          //   borderBottom: "1px solid #ccc", // Add a border to table cells
-          // },
-
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.sabooAutoColors[400],
+            overflowX: "auto",
+            "&::-webkit-scrollbar": {
+              height: "7px",
+              width: "7px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `${colors.sabooAutoColors[700]} !important`,
+              borderRadius: "100px",
+              height: "5px",
+              
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: colors.grey[100],
+            },
+          },
           "& .css-196n7va-MuiSvgIcon-root": {
             color: "white",
           },
@@ -641,6 +691,7 @@ useEffect(() => {
             rows={newData}
             columns={col.map((column) => ({
               ...column,
+             minWidth: column.width || 250,
               renderCell: (params) => (
                 <div
                   style={{
@@ -656,7 +707,7 @@ useEffect(() => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
           />
         )}

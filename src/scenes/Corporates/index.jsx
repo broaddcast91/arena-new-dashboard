@@ -52,7 +52,7 @@ const Corporates = () => {
           }
         );
         setCol([
-          { field: "id", headerName: "ID", flex: 0.5 },
+          { field: "id", headerName: "ID", width:80},
           {
             field: "name",
             headerName: "Name",
@@ -61,7 +61,7 @@ const Corporates = () => {
           {
             field: "phone",
             headerName: "Phone Number",
-            flex: 1,
+           width :150,
             cellClassName: "phone-column--cell",
           },
           {
@@ -75,14 +75,24 @@ const Corporates = () => {
             flex: 1,
           },
           {
+            field: "allQuery",
+            headerName: "All Query",
+            width :270
+          },
+          {
+            field: "error",
+            headerName: "Error",
+            width :200
+          },
+          {
             field: "date",
             headerName: "Date",
-            flex: 1,
+            width:130
           },
           {
             field: "time",
             headerName: "Time",
-            flex: 1,
+            width:130
           },
         ]);
         setData(res.data.data);
@@ -130,17 +140,16 @@ const Corporates = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
           flex: 1,
-          // cellClassName: "name-column--cell",
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+         width :150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -148,16 +157,30 @@ const Corporates = () => {
           headerName: "Email",
           flex: 1,
         },
-
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          width:130
         },
       ]);
       setData(res.data.data);
@@ -193,17 +216,16 @@ const Corporates = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
           flex: 1,
-          // cellClassName: "name-column--cell",
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+         width :150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -211,16 +233,30 @@ const Corporates = () => {
           headerName: "Email",
           flex: 1,
         },
-
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          width:130
         },
       ]);
       setData(res.data.data);
@@ -308,17 +344,16 @@ const Corporates = () => {
         }
       );
       setCol([
-        { field: "id", headerName: "ID", flex: 0.5 },
+        { field: "id", headerName: "ID", width:80},
         {
           field: "name",
           headerName: "Name",
           flex: 1,
-          // cellClassName: "name-column--cell",
         },
         {
           field: "phone",
           headerName: "Phone Number",
-          flex: 1,
+         width :150,
           cellClassName: "phone-column--cell",
         },
         {
@@ -326,16 +361,30 @@ const Corporates = () => {
           headerName: "Email",
           flex: 1,
         },
-
+        {
+          field: "outlet",
+          headerName: "Outlet",
+          flex: 1,
+        },
+        {
+          field: "allQuery",
+          headerName: "All Query",
+          width :270
+        },
+        {
+          field: "error",
+          headerName: "Error",
+          width :200
+        },
         {
           field: "date",
           headerName: "Date",
-          flex: 1,
+          width:130
         },
         {
           field: "time",
           headerName: "Time",
-          flex: 1,
+          width:130
         },
       ]);
       setData(res.data.data);
@@ -546,9 +595,9 @@ const Corporates = () => {
             color: "white",
             backgroundColor: colors.blueAccent[700], // Optional background color for headers
           },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.sabooAutoColors[400],
-          },
+          // "& .MuiDataGrid-virtualScroller": {
+          //   backgroundColor: colors.sabooAutoColors[400],
+          // },
           // "& .MuiDataGrid-footerContainer": {
           //   borderTop: "none",
           //   backgroundColor: colors.blueAccent[700],
@@ -577,6 +626,23 @@ const Corporates = () => {
           "& .css-196n7va-MuiSvgIcon-root": {
             color: "white",
           },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.sabooAutoColors[400],
+            overflowX: "auto",
+            "&::-webkit-scrollbar": {
+              height: "7px",
+              width: "7px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `${colors.sabooAutoColors[700]} !important`,
+              borderRadius: "100px",
+              height: "5px",
+              
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: colors.grey[100],
+            },
+          },
         }}
       >
         {loading ? (
@@ -588,6 +654,7 @@ const Corporates = () => {
             rows={newData}
             columns={col.map((column) => ({
               ...column,
+              minWidth : column.width || 200,
               renderCell: (params) => (
                 <div
                   style={{
@@ -603,7 +670,7 @@ const Corporates = () => {
             components={{ Toolbar: CustomToolbar }}
             sx={{
               backgroundColor: "white", // Set the background color to white
-              fontSize:14
+              fontSize:15
             }}
           />
         )}
